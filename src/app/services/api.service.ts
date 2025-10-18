@@ -35,6 +35,33 @@ export interface Place {
   image_path: string;
 }
 
+// Reservation interfaces
+export interface StartReservationRequest {
+  user_prompt: string;
+}
+
+export interface StartReservationResponse {
+  session_id: string;
+  status: string;
+  message: string;
+}
+
+export interface ReservationSession {
+  session_id: string;
+  status: string;
+  user_prompt: string;
+  waiting_for_input: boolean;
+  created_at: number;
+  updated_at: number;
+  result?: any;
+  error?: string;
+}
+
+export interface AllSessionsResponse {
+  total_sessions: number;
+  sessions: { [sessionId: string]: any };
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -87,5 +114,22 @@ export class ApiService {
   // Get a specific event
   getEvent(placeId: number, eventId: string): Observable<{event: Event}> {
     return this.http.get<{event: Event}>(`${this.baseUrl}/places/${placeId}/events/${eventId}`);
+  }
+
+  // Reservation API methods
+  startReservation(request: StartReservationRequest): Observable<StartReservationResponse> {
+    return this.http.post<StartReservationResponse>(`${this.baseUrl}/reservations/start`, request);
+  }
+
+  getReservationStatus(sessionId: string): Observable<ReservationSession> {
+    return this.http.get<ReservationSession>(`${this.baseUrl}/reservations/${sessionId}/status`);
+  }
+
+  deleteReservationSession(sessionId: string): Observable<{message: string}> {
+    return this.http.delete<{message: string}>(`${this.baseUrl}/reservations/${sessionId}`);
+  }
+
+  getAllReservationSessions(): Observable<AllSessionsResponse> {
+    return this.http.get<AllSessionsResponse>(`${this.baseUrl}/reservations/`);
   }
 }

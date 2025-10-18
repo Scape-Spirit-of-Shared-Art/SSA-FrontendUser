@@ -61,7 +61,7 @@
           <!-- Loading content with left padding to avoid overlap -->
           <div class="message-content pl-12 sm:pl-20">
             <div class="flex items-center gap-2">
-              <div class="animate-pulse text-scape-dark font-bold text-sm font-lexend">Tzappu is typing</div>
+              <div class="animate-pulse text-scape-dark font-bold text-sm font-lexend">Reservation assistant is working</div>
               <div class="flex gap-1">
                 <div class="w-1 h-1 bg-scape-teal rounded-full animate-bounce"></div>
                 <div class="w-1 h-1 bg-scape-teal rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
@@ -69,6 +69,15 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="mb-4">
+        <div class="bg-red-500/20 rounded-2xl border border-red-500/30 p-4">
+          <p class="text-red-600 font-bold text-sm leading-relaxed text-justify font-lexend">
+            {{ errorMessage }}
+          </p>
         </div>
       </div>
     </div>
@@ -171,7 +180,7 @@
   <div class="relative bg-scape-cream/95 backdrop-blur-sm rounded-2xl border border-scape-teal/30 shadow-2xl max-w-[90vw] w-full max-w-md max-h-[80vh] overflow-hidden">
     <!-- Header -->
     <div class="bg-scape-teal/20 border-b border-scape-teal/30 p-4 flex items-center justify-between">
-      <h3 class="text-scape-dark font-bold text-lg font-lexend">Saved Chats</h3>
+      <h3 class="text-scape-dark font-bold text-lg font-lexend">Reservation Sessions</h3>
       <button 
         (click)="toggleChatHistory()"
         class="w-8 h-8 flex items-center justify-center hover:bg-scape-teal/20 rounded-lg transition-colors"
@@ -185,7 +194,7 @@
     <!-- Content -->
     <div class="p-4 overflow-y-auto max-h-[60vh]">
       <div *ngIf="savedChats.length === 0" class="text-scape-dark/60 text-sm text-center py-8 font-lexend">
-        No saved chats yet
+        No reservation sessions yet
       </div>
       
       <div *ngFor="let chat of savedChats" class="mb-3 last:mb-0">
