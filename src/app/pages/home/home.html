@@ -1,0 +1,109 @@
+<div class="home-page">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <img 
+        src="https://api.builder.io/api/v1/image/assets/TEMP/7638a109cc1105193b1f2d1be17d5b5936541e69?width=768" 
+        alt="Craiova" 
+        class="hero-image"
+      />
+      <div class="hero-content">
+        <h2 class="location-label">MY LOCATION</h2>
+        <h1 class="city-name">CRAIOVA</h1>
+      </div>
+    </section>
+  
+    <!-- Search Bar -->
+    <div class="search-container">
+      <input 
+        type="text" 
+        placeholder="search" 
+        class="search-input"
+        (input)="onSearch($event)"
+      />
+      <img 
+        src="https://api.builder.io/api/v1/image/assets/TEMP/9c67645441623b345fd4b92d5d5abf5069a1d495?width=48" 
+        alt="Search" 
+        class="search-icon"
+      />
+    </div>
+  
+    <!-- Moments That Move the City -->
+    <section class="section">
+      <h2 class="section-title">Moments That Move the City</h2>
+      <div class="events-scroll">
+        <div class="event-card" *ngFor="let event of events" (click)="onEventClick(event)">
+          <div class="event-card-wrapper">
+            <img [src]="event.image" [alt]="event.title" class="event-image" />
+            <div class="event-date">
+              <span class="event-day">{{ event.date.day }}</span>
+              <span class="event-month">{{ event.date.month }}</span>
+            </div>
+            <div class="event-info">
+              <h3 class="event-title">{{ event.title }}</h3>
+              <div class="event-location">
+                <svg class="location-icon" width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.5 10C3.5 10.2761 3.27614 10.5 3 10.5C2.72386 10.5 2.5 10.2761 2.5 10L3 10L3.5 10ZM3 5.66667C1.52724 5.66667 0.333333 4.47276 0.333333 3C0.333333 1.52724 1.52724 0.333333 3 0.333333C4.47276 0.333333 5.66667 1.52724 5.66667 3C5.66667 4.47276 4.47276 5.66667 3 5.66667ZM3 10L2.5 10L2.5 3L3 3L3.5 3L3.5 10L3 10Z" fill="#FEF5E6"/>
+                </svg>
+                <span>{{ event.location }}</span>
+              </div>
+            </div>
+            <svg class="favorite-icon" width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.25 2.83999C5.08333 0.101573 1 0.393239 1 3.89326C1 7.39327 6.25 10.31 6.25 10.31C6.25 10.31 11.5 7.39327 11.5 3.89326C11.5 0.393239 7.41667 0.101573 6.25 2.83999Z" stroke="#FEF5E6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- City Layers -->
+    <section class="section">
+      <h2 class="section-title">City Layers</h2>
+      <div class="city-layers-grid">
+        <div 
+          class="layer-card" 
+          *ngFor="let layer of cityLayers; let i = index" 
+          (click)="onCategoryClick(layer)"
+        >
+          <img [src]="layer.image" [alt]="layer.title" class="layer-image" />
+          <h3 class="layer-title">{{ layer.title }}</h3>
+          <img 
+            *ngIf="i === 0"
+            src="https://api.builder.io/api/v1/image/assets/TEMP/9e342759282e886200c1d3b703d74e2981778e29?width=90" 
+            alt="Decoration" 
+            class="layer-decoration"
+          />
+        </div>
+      </div>
+    </section>
+  
+    <!-- The Other Beat -->
+    <section class="section">
+      <h2 class="section-title">The Other Beat</h2>
+      <div class="other-beat-scroll">
+        <div 
+          class="beat-pill" 
+          *ngFor="let item of otherBeat" 
+          (click)="onCategoryClick(item)"
+        >
+          <img [src]="item.image" [alt]="item.title" class="beat-image" />
+          <span class="beat-title">{{ item.title }}</span>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Own the City -->
+    <section class="section">
+      <h2 class="section-title">Own the City</h2>
+      <div class="map-container">
+        <img 
+          src="https://api.builder.io/api/v1/image/assets/TEMP/50c800033314162b70f7908ca959f7d6665441cb?width=710" 
+          alt="Craiova Map" 
+          class="map-image"
+        />
+      </div>
+    </section>
+  
+    <!-- Navbar -->
+    <app-navbar></app-navbar>
+  </div>
+  
