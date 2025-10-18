@@ -1,0 +1,246 @@
+<div class="min-h-screen bg-gradient-to-b from-scape-cream via-scape-teal/20 to-scape-dark pb-24">
+  <div class="max-w-[412px] mx-auto px-6 pt-8">
+    
+    <!-- Profile Icon -->
+    <div class="flex justify-center mb-8">
+      <div class="w-24 h-24 bg-scape-green/20 rounded-full flex items-center justify-center border-2 border-scape-green/30">
+        <svg class="w-12 h-12 text-scape-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Profile Name -->
+    <div class="flex items-center justify-center gap-3 mb-8">
+      @if (!isEditingName()) {
+        <h1 class="text-scape-dark font-bold text-3xl capitalize text-center font-lexend">
+          {{ userName() }}
+        </h1>
+        <button 
+          (click)="startEditingName()"
+          class="w-8 h-8 flex items-center justify-center hover:bg-scape-green/20 rounded-lg transition-colors"
+        >
+          <svg class="w-5 h-5 text-scape-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+          </svg>
+        </button>
+      } @else {
+        <div class="flex flex-col sm:flex-row items-center gap-3">
+          <input 
+            type="text" 
+            [(ngModel)]="tempUserName"
+            class="text-scape-dark font-bold text-3xl capitalize text-center bg-transparent border-b-2 border-scape-green/50 focus:border-scape-green focus:outline-none px-2 py-1 font-lexend min-w-[200px] max-w-full"
+            placeholder="Enter name"
+            (keydown.enter)="saveUserName()"
+            (keydown.escape)="cancelEditingName()"
+            #nameInput
+          />
+          <div class="flex items-center gap-2">
+            <button 
+              (click)="saveUserName()"
+              class="w-8 h-8 flex items-center justify-center bg-scape-green/80 hover:bg-scape-green rounded-lg transition-colors"
+              title="Save"
+            >
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </button>
+            <button 
+              (click)="cancelEditingName()"
+              class="w-8 h-8 flex items-center justify-center bg-red-500/80 hover:bg-red-500 rounded-lg transition-colors"
+              title="Cancel"
+            >
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Theme Toggle -->
+      <!-- <div class="flex items-center justify-center gap-8 mb-4">
+        <span class="text-navy-90 font-bold text-2xl uppercase" style="letter-spacing: -0.24px;">THEME</span>
+        <div class="relative">
+          <input type="checkbox" id="dark-mode-toggle" [checked]="isDarkTheme()" (change)="toggleTheme()" class="sr-only">
+            <label for="dark-mode-toggle" class="toggle" style="display: inline-block; width: 60px; height: 30px; background: #adbcdb; border-radius: 30px; position: relative; cursor: pointer; border: 2px solid #1e2223;">
+              <span style="position: absolute; top: 3px; left: 5px; width: 20px; height: 20px; background: #ffffff; border-radius: 50%; transition: transform 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></span>
+            </label>
+        </div>
+      </div> -->
+
+    <!-- Terms and Conditions -->
+    <button 
+      (click)="openTermsPopup()"
+      class="w-full bg-scape-teal/20 rounded-2xl border border-scape-teal/30 p-5 mb-6 flex items-center justify-between hover:bg-scape-teal/30 transition-colors"
+    >
+      <span class="text-scape-dark font-bold text-xl uppercase font-lexend">TERMS AND CONDITIONS</span>
+      <svg class="w-5 h-5 text-scape-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </button>
+
+    <!-- Review Section -->
+    <div class="relative">
+      <div class="bg-scape-green/10 rounded-2xl border border-scape-green/20 p-6 mb-6">
+        <!-- Title -->
+        <h2 class="text-scape-dark font-bold text-xl uppercase text-left mb-4 font-lexend">
+          LEAVE US A REVIEW
+        </h2>
+
+        <!-- Text Area -->
+        <textarea 
+          [value]="reviewText()"
+          (input)="onReviewTextChange($event)"
+          placeholder="Type your feedback here..." 
+          class="w-full h-32 bg-transparent text-scape-dark font-medium text-sm placeholder:text-scape-dark/60 focus:outline-none resize-none border border-scape-teal/20 rounded-lg p-3 font-lexend"
+        ></textarea>
+      </div>
+
+      <!-- Send Button -->
+      <div class="flex justify-center">
+        @if (reviewSent()) {
+          <div class="bg-scape-green/20 rounded-2xl border border-scape-green px-6 py-3 flex items-center gap-2">
+            <svg class="w-5 h-5 text-scape-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-scape-green font-bold text-base uppercase font-lexend">
+              SENT!
+            </span>
+          </div>
+        } @else {
+          <button 
+            (click)="sendReview()"
+            [disabled]="isSendingReview() || !reviewText().trim()"
+            class="bg-scape-teal/80 hover:bg-scape-teal text-white rounded-2xl px-8 py-3 flex items-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-lexend font-bold"
+          >
+            @if (isSendingReview()) {
+              <div class="w-5 h-5">
+                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              </div>
+            } @else {
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+              </svg>
+            }
+            <span class="text-base uppercase">
+              @if (isSendingReview()) {
+                SENDING...
+              } @else {
+                SEND
+              }
+            </span>
+          </button>
+        }
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Terms and Conditions Popup -->
+  @if (showTermsPopup()) {
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <!-- Backdrop -->
+      <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" (click)="closeTermsPopup()"></div>
+      
+      <!-- Popup Content -->
+      <div class="relative bg-scape-cream/95 backdrop-blur-sm rounded-2xl border border-scape-teal/30 shadow-2xl max-w-[90vw] max-h-[90vh] overflow-hidden">
+        <!-- Header -->
+        <div class="bg-scape-teal/20 text-center border-b border-scape-teal/30 p-4 flex items-center justify-between">
+          <h2 class="text-scape-dark font-bold text-xl uppercase font-lexend">
+            TERMS AND CONDITIONS
+          </h2>
+          <button 
+            (click)="closeTermsPopup()"
+            class="w-8 h-8 flex items-center justify-center hover:bg-scape-teal/20 rounded-lg transition-colors"
+          >
+            <svg class="w-6 h-6 text-scape-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+        
+        <!-- Content -->
+        <div class="p-6 overflow-y-auto max-h-[70vh]">
+          <div class="space-y-4 text-scape-dark/80">
+            <div>
+              <h3 class="text-scape-dark font-bold text-lg mb-2 font-lexend">1. Acceptance of Terms</h3>
+              <p class="text-sm leading-relaxed font-lexend">By accessing and using TzApp, you agree to these Terms and Conditions. If you do not agree, you are not authorized to use the application.</p>
+            </div>
+            
+            <div>
+              <h3 class="text-scape-dark font-bold text-lg mb-2 font-lexend">2. Service Overview</h3>
+              <p class="text-sm leading-relaxed mb-2 font-lexend">TzApp offers the following features:</p>
+              <ul class="text-sm leading-relaxed ml-4 space-y-1 font-lexend">
+                <li>• <strong>Weather Prediction Chatbot:</strong> Provides personalized weather forecasts for events, vacations, and flights, using real-time data to offer location-specific recommendations.</li>
+                <li>• <strong>Smart Planner:</strong> Assists in event planning by suggesting optimal times based on weather forecasts and calendar data.</li>
+                <li>• <strong>Saved Locations:</strong> Users can save locations for easy access to detailed weather forecasts, which are stored locally on their devices.</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 class="text-navy-90 font-bold text-lg mb-2">3. Application Usage</h3>
+              <p class="text-sm leading-relaxed mb-2">TzApp is for personal, non-commercial use only, including:</p>
+              <ul class="text-sm leading-relaxed ml-4 space-y-1">
+                <li>• Viewing weather forecasts</li>
+                <li>• Interacting with the chatbot for personalized recommendations</li>
+                <li>• Saving and viewing preferred locations</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 class="text-navy-90 font-bold text-lg mb-2">4. Privacy and Data Protection</h3>
+              <p class="text-sm leading-relaxed">By using TzApp, you consent to our Privacy Policy, which details how we collect and protect personal data. We may collect information like location and user preferences to improve services. We do not sell or distribute personal data without explicit consent, unless required by law.</p>
+            </div>
+            
+            <div>
+              <h3 class="text-navy-90 font-bold text-lg mb-2">5. Limitation of Liability</h3>
+              <p class="text-sm leading-relaxed">While we use reliable weather data, forecasts are estimates and not guaranteed. Users are responsible for not making critical decisions solely based on TzApp forecasts. We are not liable for any damages resulting from app usage.</p>
+            </div>
+            
+            <div>
+              <h3 class="text-navy-90 font-bold text-lg mb-2">6. Chatbot Functionality</h3>
+              <p class="text-sm leading-relaxed">The chatbot provides event and vacation recommendations based on weather forecasts but does not replace expert consultation in extreme conditions. TzApp is not liable for decisions based on chatbot advice.</p>
+            </div>
+            
+            <div>
+              <h3 class="text-navy-90 font-bold text-lg mb-2">7. Modifications to Terms</h3>
+              <p class="text-sm leading-relaxed">We may update these Terms at any time. Changes will be published within the app, and users will be notified. Continued use constitutes acceptance of the new terms.</p>
+            </div>
+            
+            <div>
+              <h3 class="text-navy-90 font-bold text-lg mb-2">8. Governing Law</h3>
+              <p class="text-sm leading-relaxed">These Terms are governed by Romanian law. Any disputes will be resolved under Romanian legislation.</p>
+            </div>
+            
+            <div>
+              <h3 class="text-navy-90 font-bold text-lg mb-2">9. Dispute Resolution</h3>
+              <p class="text-sm leading-relaxed">In case of a dispute, please contact TzApp for resolution. If unresolved, the matter will be handled under Romanian law.</p>
+            </div>
+            
+            <div>
+              <h3 class="text-navy-90 font-bold text-lg mb-2">10. Contact Us</h3>
+              <p class="text-sm leading-relaxed">For questions about these Terms, please contact us at:</p>
+              <p class="text-sm leading-relaxed mt-1"><strong>Phone:</strong> 0775336202</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="bg-scape-teal/10 border-t border-scape-teal/30 p-4 flex justify-center">
+          <button 
+            (click)="closeTermsPopup()"
+            class="bg-scape-teal/20 rounded-2xl border border-scape-teal/30 px-6 py-2 text-scape-dark font-bold text-base uppercase hover:bg-scape-teal/30 transition-colors font-lexend"
+          >
+            CLOSE
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+</div>
