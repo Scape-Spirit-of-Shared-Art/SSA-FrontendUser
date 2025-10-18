@@ -31,7 +31,6 @@ export class ChatbotPage {
 
   currentMessage: string = '';
   isLoading: boolean = false;
-  userGoatImageUrl: string = 'https://api.builder.io/api/v1/image/assets/TEMP/profile1.jpg';
   showSaveDialog: boolean = false;
   showChatHistory: boolean = false;
   chatTitle: string = '';

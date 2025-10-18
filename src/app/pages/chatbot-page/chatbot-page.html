@@ -1,5 +1,5 @@
-<div class="min-h-screen pb-32 flex flex-col chatbot-container">
-  <div class="max-w-[412px] w-full mx-auto px-2 sm:px-[6px] pt-4 sm:pt-7 flex-1 flex flex-col">
+<div class="min-h-screen bg-gradient-to-b from-scape-cream via-scape-teal/20 to-scape-dark pb-24 flex flex-col">
+  <div class="max-w-[412px] w-full mx-auto px-6 pt-8 flex-1 flex flex-col">
     <!-- Chat Messages Area -->
     <div class="flex-1 overflow-y-auto mb-2" #messagesContainer>
       <!-- Dynamic Messages -->
@@ -7,7 +7,7 @@
         <!-- Assistant Message -->
         <div *ngIf="message.role === 'assistant'" class="assistant-message-container">
           <!-- Message Bubble with overlapping goat -->
-          <div class="bg-cyan-light/20 rounded-[20px] border-b border-cyan p-3 sm:p-4 relative">
+          <div class="bg-scape-teal/20 rounded-2xl border border-scape-teal/30 p-4 relative">
             <!-- Goat positioned to overlap the text block -->
             <div class="goat-overlay absolute -top-2 -left-2 sm:-top-3 sm:-left-3">
               <img 
@@ -19,7 +19,7 @@
             
             <!-- Text content with left padding to avoid overlap -->
             <div class="message-content pl-12 sm:pl-20">
-              <p class="text-cyan font-bold text-xs uppercase leading-[10px] text-justify assistant-message-text">
+              <p class="text-scape-dark font-bold text-sm leading-relaxed text-justify assistant-message-text font-lexend">
                 {{ message.content }}
               </p>
             </div>
@@ -29,20 +29,18 @@
         <!-- User Message -->
         <div *ngIf="message.role === 'user'" class="flex items-start gap-2 sm:gap-3 justify-end">
           <!-- Message Bubble -->
-          <div class="flex-1 bg-white/30 rounded-[20px] border-b border-cyan p-3 sm:p-4 mt-2 sm:mt-4 max-w-[85%] sm:max-w-[80%]">
-            <p class="text-navy-90 font-bold text-xs uppercase leading-[14px] text-justify user-message-text break-words">
+          <div class="flex-1 bg-scape-cream/30 rounded-2xl border border-scape-teal/30 p-4 mt-2 sm:mt-4 max-w-[85%] sm:max-w-[80%]">
+            <p class="text-scape-dark font-bold text-sm leading-relaxed text-justify user-message-text break-words font-lexend">
               {{ message.content }}
             </p>
           </div>
           
-          <!-- User Avatar (Goat Photo) -->
+          <!-- User Avatar -->
           <div class="flex-shrink-0">
-            <div class="w-[32px] h-[32px] sm:w-[40px] sm:h-[40px] rounded-full overflow-hidden">
-              <img 
-                [src]="userGoatImageUrl" 
-                alt="User Profile" 
-                class="w-full h-full object-cover"
-              />
+            <div class="w-[32px] h-[32px] sm:w-[40px] sm:h-[40px] bg-scape-green/20 rounded-full flex items-center justify-center border-2 border-scape-green/30">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-scape-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+              </svg>
             </div>
           </div>
         </div>
@@ -50,7 +48,7 @@
 
       <!-- Loading Indicator -->
       <div *ngIf="isLoading" class="assistant-message-container mb-4">
-        <div class="bg-cyan-light/20 rounded-[20px] border-b border-cyan p-3 sm:p-4 relative">
+        <div class="bg-scape-teal/20 rounded-2xl border border-scape-teal/30 p-4 relative">
           <!-- Goat positioned to overlap the text block -->
           <div class="goat-overlay absolute -top-2 -left-2 sm:-top-3 sm:-left-3">
             <img 
@@ -63,11 +61,11 @@
           <!-- Loading content with left padding to avoid overlap -->
           <div class="message-content pl-12 sm:pl-20">
             <div class="flex items-center gap-2">
-              <div class="animate-pulse text-cyan font-bold text-xs">Tzappu is typing</div>
+              <div class="animate-pulse text-scape-dark font-bold text-sm font-lexend">Tzappu is typing</div>
               <div class="flex gap-1">
-                <div class="w-1 h-1 bg-cyan rounded-full animate-bounce"></div>
-                <div class="w-1 h-1 bg-cyan rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
-                <div class="w-1 h-1 bg-cyan rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                <div class="w-1 h-1 bg-scape-teal rounded-full animate-bounce"></div>
+                <div class="w-1 h-1 bg-scape-teal rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                <div class="w-1 h-1 bg-scape-teal rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
               </div>
             </div>
           </div>
@@ -81,7 +79,7 @@
         <button 
           (click)="saveChat()"
           [disabled]="!hasMessagesToSave()"
-          class="bg-cyan/20 hover:bg-cyan/30 text-cyan font-bold text-sm px-4 py-2 rounded-[15px] border border-cyan/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-cyan/20 flex items-center gap-2"
+          class="bg-scape-teal/20 hover:bg-scape-teal/30 text-scape-dark font-bold text-sm px-4 py-2 rounded-2xl border border-scape-teal/30 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-scape-teal/20 flex items-center gap-2 font-lexend"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3-3m0 0l-3 3m3-3v12"/>
@@ -90,7 +88,7 @@
         </button>
         <button 
           (click)="clearChat()"
-          class="bg-red-500/20 hover:bg-red-500/30 text-red-600 font-bold text-sm px-4 py-2 rounded-[15px] border border-red-500/50 transition-all duration-200 flex items-center gap-2"
+          class="bg-red-500/20 hover:bg-red-500/30 text-red-600 font-bold text-sm px-4 py-2 rounded-2xl border border-red-500/30 transition-all duration-200 flex items-center gap-2 font-lexend"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
@@ -102,19 +100,19 @@
 
     <!-- Input Area -->
     <div class="mt-auto mb-4">
-      <div class="relative bg-white/20 rounded-[20px] border-b border-cyan p-3 sm:p-4">
+      <div class="relative bg-scape-cream/20 rounded-2xl border border-scape-teal/30 p-4">
         <input 
           type="text" 
           [(ngModel)]="currentMessage"
           (keypress)="onKeyPress($event)"
           placeholder="write here..." 
-          class="w-full bg-transparent text-navy-90 font-bold text-sm placeholder:text-goat-sky placeholder:lowercase focus:outline-none chat-input pr-12"
+          class="w-full bg-transparent text-scape-dark font-bold text-sm placeholder:text-scape-dark/60 placeholder:lowercase focus:outline-none chat-input pr-12 font-lexend"
           [disabled]="isLoading"
         />
         <button 
           (click)="sendMessage()"
           [disabled]="!currentMessage.trim() || isLoading"
-          class="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-cyan hover:text-cyan-dark disabled:text-gray-400 disabled:cursor-not-allowed"
+          class="absolute right-4 top-1/2 transform -translate-y-1/2 text-scape-teal hover:text-scape-green disabled:text-gray-400 disabled:cursor-not-allowed"
         >
           <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
             <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
@@ -127,25 +125,25 @@
 </div>
 
 <!-- Save Chat Dialog -->
-<div *ngIf="showSaveDialog" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-  <div class="bg-white rounded-[20px] p-6 max-w-md w-full mx-4">
-    <h3 class="text-navy font-bold text-lg mb-4">Save Chat</h3>
+<div *ngIf="showSaveDialog" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+  <div class="bg-scape-cream/95 backdrop-blur-sm rounded-2xl border border-scape-teal/30 shadow-2xl p-6 max-w-md w-full">
+    <h3 class="text-scape-dark font-bold text-lg mb-4 font-lexend">Save Chat</h3>
     <input 
       type="text" 
       [(ngModel)]="chatTitle"
       placeholder="Enter chat title..."
-      class="w-full bg-cyan-light/20 rounded-[20px] border-b border-cyan p-3 mb-4 text-navy-90 font-bold text-sm placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan"
+      class="w-full bg-scape-teal/20 rounded-2xl border border-scape-teal/30 p-3 mb-4 text-scape-dark font-bold text-sm placeholder:text-scape-dark/60 focus:outline-none focus:ring-2 focus:ring-scape-teal font-lexend"
     />
     <div class="flex gap-3 justify-end">
       <button 
         (click)="cancelSaveChat()"
-        class="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
+        class="px-4 py-2 text-scape-dark/60 hover:text-scape-dark transition-colors font-lexend"
       >
         Cancel
       </button>
       <button 
         (click)="confirmSaveChat()"
-        class="px-4 py-2 bg-cyan text-white rounded-[20px] hover:bg-cyan-dark transition-colors"
+        class="px-4 py-2 bg-scape-teal text-white rounded-2xl hover:bg-scape-green transition-colors font-lexend"
       >
         Save
       </button>
@@ -156,7 +154,7 @@
 <!-- Chat History Toggle Button -->
 <button 
   (click)="toggleChatHistory()"
-  class="fixed right-2 sm:right-4 top-2 sm:top-4 z-50 bg-cyan/90 hover:bg-cyan text-white rounded-full p-2 sm:p-3 shadow-lg transition-all duration-200 hover:scale-105"
+  class="fixed right-2 sm:right-4 top-2 sm:top-4 z-50 bg-scape-teal/90 hover:bg-scape-teal text-white rounded-full p-2 sm:p-3 shadow-lg transition-all duration-200 hover:scale-105"
   title="Chat History"
 >
   <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -170,15 +168,15 @@
   <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" (click)="toggleChatHistory()"></div>
   
   <!-- Modal Content -->
-  <div class="relative bg-white/95 backdrop-blur-sm rounded-[20px] border border-cyan shadow-2xl max-w-[90vw] w-full max-w-md max-h-[80vh] overflow-hidden">
+  <div class="relative bg-scape-cream/95 backdrop-blur-sm rounded-2xl border border-scape-teal/30 shadow-2xl max-w-[90vw] w-full max-w-md max-h-[80vh] overflow-hidden">
     <!-- Header -->
-    <div class="bg-cyan-light/20 border-b border-cyan p-4 flex items-center justify-between">
-      <h3 class="text-navy font-bold text-lg">Saved Chats</h3>
+    <div class="bg-scape-teal/20 border-b border-scape-teal/30 p-4 flex items-center justify-between">
+      <h3 class="text-scape-dark font-bold text-lg font-lexend">Saved Chats</h3>
       <button 
         (click)="toggleChatHistory()"
-        class="w-8 h-8 flex items-center justify-center hover:bg-white/30 rounded-lg transition-colors"
+        class="w-8 h-8 flex items-center justify-center hover:bg-scape-teal/20 rounded-lg transition-colors"
       >
-        <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-6 h-6 text-scape-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
         </svg>
       </button>
@@ -186,17 +184,17 @@
     
     <!-- Content -->
     <div class="p-4 overflow-y-auto max-h-[60vh]">
-      <div *ngIf="savedChats.length === 0" class="text-gray-500 text-sm text-center py-8">
+      <div *ngIf="savedChats.length === 0" class="text-scape-dark/60 text-sm text-center py-8 font-lexend">
         No saved chats yet
       </div>
       
       <div *ngFor="let chat of savedChats" class="mb-3 last:mb-0">
         <div 
           (click)="loadChat(chat.id)"
-          class="bg-cyan-light/20 rounded-[15px] p-3 cursor-pointer hover:bg-cyan-light/30 transition-colors group"
+          class="bg-scape-teal/20 rounded-2xl p-3 cursor-pointer hover:bg-scape-teal/30 transition-colors group"
         >
           <div class="flex justify-between items-start mb-1">
-            <h4 class="text-navy font-bold text-sm leading-tight flex-1 mr-2">{{ chat.title }}</h4>
+            <h4 class="text-scape-dark font-bold text-sm leading-tight flex-1 mr-2 font-lexend">{{ chat.title }}</h4>
             <button 
               (click)="deleteChat(chat.id, $event)"
               class="text-red-500 hover:text-red-700 opacity-0 group-hover:opacity-100 transition-opacity text-sm"
@@ -204,8 +202,8 @@
               ×
             </button>
           </div>
-          <p class="text-gray-600 text-xs">{{ formatDate(chat.created_at) }}</p>
-          <p class="text-gray-500 text-xs">{{ chat.message_count || 0 }} messages</p>
+          <p class="text-scape-dark/60 text-xs font-lexend">{{ formatDate(chat.created_at) }}</p>
+          <p class="text-scape-dark/50 text-xs font-lexend">{{ chat.message_count || 0 }} messages</p>
         </div>
       </div>
     </div>

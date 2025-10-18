@@ -1,9 +1,11 @@
+// Chatbot page styles matching app design
 .chatbot-container {
-  background: linear-gradient(180deg, #FFF 13.52%, rgba(167, 235, 242, 0.40) 76.72%, rgba(84, 172, 191, 0.68) 87.94%, #26658C 100%);
+  background: linear-gradient(180deg, #FEF5E6 13.52%, rgba(150, 188, 165, 0.40) 76.72%, rgba(109, 147, 134, 0.68) 87.94%, #354B48 100%);
 }
 
 .assistant-message-text {
   letter-spacing: -0.11px;
+  font-family: 'Lexend Deca', sans-serif;
 }
 
 .user-message-text {
@@ -12,10 +14,12 @@
   overflow-wrap: break-word;
   hyphens: auto;
   white-space: pre-wrap;
+  font-family: 'Lexend Deca', sans-serif;
 }
 
 .chat-input {
   letter-spacing: -1.05px;
+  font-family: 'Lexend Deca', sans-serif;
 }
 
 // Custom scrollbar for messages container
@@ -24,17 +28,17 @@
 }
 
 .overflow-y-auto::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(254, 245, 230, 0.1);
   border-radius: 2px;
 }
 
 .overflow-y-auto::-webkit-scrollbar-thumb {
-  background: rgba(84, 172, 191, 0.5);
+  background: rgba(150, 188, 165, 0.5);
   border-radius: 2px;
 }
 
 .overflow-y-auto::-webkit-scrollbar-thumb:hover {
-  background: rgba(84, 172, 191, 0.7);
+  background: rgba(150, 188, 165, 0.7);
 }
 
 // Animation for typing indicator
@@ -61,7 +65,7 @@ button {
 
 // Focus styles for input
 .chat-input:focus {
-  box-shadow: 0 0 0 2px rgba(84, 172, 191, 0.3);
+  box-shadow: 0 0 0 2px rgba(150, 188, 165, 0.3);
 }
 
 // Message bubble improvements
@@ -76,14 +80,14 @@ button {
 }
 
 // Ensure proper text wrapping in message bubbles
-.bg-white\/30, .bg-cyan-light\/20 {
+.bg-scape-cream\/30, .bg-scape-teal\/20 {
   word-break: break-word;
   overflow-wrap: break-word;
 }
 
 // User avatar styling
 .rounded-full {
-  border: 2px solid rgba(84, 172, 191, 0.3);
+  border: 2px solid rgba(150, 188, 165, 0.3);
 }
 
 // Save dialog styling
@@ -132,17 +136,17 @@ button {
 }
 
 .max-h-96::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(254, 245, 230, 0.1);
   border-radius: 2px;
 }
 
 .max-h-96::-webkit-scrollbar-thumb {
-  background: rgba(84, 172, 191, 0.5);
+  background: rgba(150, 188, 165, 0.5);
   border-radius: 2px;
 }
 
 .max-h-96::-webkit-scrollbar-thumb:hover {
-  background: rgba(84, 172, 191, 0.7);
+  background: rgba(150, 188, 165, 0.7);
 }
 
 // Assistant message with overlapping goat styling
@@ -177,7 +181,7 @@ button {
   }
   
   // Smaller message bubbles on mobile
-  .bg-white\/30, .bg-cyan-light\/20 {
+  .bg-scape-cream\/30, .bg-scape-teal\/20 {
     padding: 0.75rem;
   }
   
