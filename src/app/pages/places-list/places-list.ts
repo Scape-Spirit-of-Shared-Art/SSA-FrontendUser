@@ -124,12 +124,8 @@ export class PlacesListComponent implements OnInit {
 
   onPlaceClick(place: Place) {
     console.log('Place clicked:', place);
-    // Navigate to place detail page or show more info
-    // For now, we can navigate to a place detail page or show events
-    if (place.events && place.events.length > 0) {
-      // Navigate to the first event or show events list
-      this.router.navigate(['/event', place.id, place.events[0].id]);
-    }
+    // Navigate to the place detail page
+    this.router.navigate(['/places-page', place.id]);
   }
 
   getBusyIcons(level: number): number[] {

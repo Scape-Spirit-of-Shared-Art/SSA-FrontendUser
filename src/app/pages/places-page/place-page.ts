@@ -1,14 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
-
-interface Event {
-  id: number;
-  title: string;
-  location: string;
-  date: { day: string; month: string };
-  image: string;
-}
+import { ActivatedRoute, Router } from '@angular/router';
+import { NavbarComponent } from '../../components/navbar/navbar';
+import { ApiService, Place, Event } from '../../services/api.service';
 
 interface FloorSection {
   number: number;
@@ -21,63 +15,45 @@ interface FloorSection {
   selector: 'app-place-page',
   standalone: true,
   imports: [CommonModule, NavbarComponent],
-  templateUrl: './place-page.component.html',
-  styleUrl: './place-page.component.css'
+  templateUrl: './place-page.html',
+  styleUrl: './place-page.css'
 })
-export class PlacePageComponent {
-  place = {
-    name: 'Muzeul Cărții și Exilului Românesc',
-    image: 'https://api.builder.io/api/v1/image/assets/TEMP/7c4a4693085ea05fe2f0c81de0b2b4f284588fea?width=762',
-    description: 'Located in the historic Dianu House, this unique museum honors the cultural legacy of Romanian intellectuals who lived and created in exile. With rare manuscripts, personal archives, and over 40 curated collections the museum bridges Romania\'s postwar diaspora with its national heritage.',
-    schedule: {
-      weekdays: 'M-F: .......',
-      saturday: 'S: ...........',
-      sunday: 'S: ...........'
-    },
-    contact: {
-      website: {
-        label: 'website',
-        url: 'https://craiovalive.ro/serie/festivalul-maria-tanase/'
-      },
-      email: 'muzeulolteniei@yahoo.com',
-      phone: '0251419435',
-      address: {
-        street: 'Str. Matei Basarab, nr. 16,',
-        city: 'Craiova, Dolj România'
-      }
-    }
-  };
+export class PlacePageComponent implements OnInit {
+  place: Place | null = null;
+  events: Event[] = [];
+  loading = true;
+  error: string | null = null;
 
-  events: Event[] = [
-    {
-      id: 1,
-      title: 'nume eveniment',
-      location: 'locatie',
-      date: { day: '18', month: 'oct' },
-      image: 'https://api.builder.io/api/v1/image/assets/TEMP/2de7dbcbd7e38716604a08533dea9b97adb8649c?width=292'
-    },
-    {
-      id: 2,
-      title: 'nume eveniment',
-      location: 'locatie',
-      date: { day: '18', month: 'oct' },
-      image: 'https://api.builder.io/api/v1/image/assets/TEMP/2de7dbcbd7e38716604a08533dea9b97adb8649c?width=292'
-    },
-    {
-      id: 3,
-      title: 'nume eveniment',
-      location: 'locatie',
-      date: { day: '18', month: 'oct' },
-      image: 'https://api.builder.io/api/v1/image/assets/TEMP/06b9ead9c2006c4a9eb50f9c4852d0b23743afee?width=292'
-    },
-    {
-      id: 4,
-      title: 'nume eveniment',
-      location: 'locatie',
-      date: { day: '18', month: 'oct' },
-      image: 'https://api.builder.io/api/v1/image/assets/TEMP/ad33659c33381eac40061641b81f19d65a13ad9f?width=292'
-    }
-  ];
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private apiService: ApiService
+  ) {}
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const placeId = +params['id'];
+      this.loadPlaceData(placeId);
+    });
+  }
+
+  loadPlaceData(placeId: number) {
+    this.loading = true;
+    this.error = null;
+
+    this.apiService.getPlaceById(placeId).subscribe({
+      next: (response) => {
+        this.place = response.place;
+        this.events = response.place.events || [];
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading place:', error);
+        this.error = 'Failed to load place data';
+        this.loading = false;
+      }
+    });
+  }
 
   floorSections: FloorSection[] = [
     { number: 1, capacity: 10, occupied: 1, position: 'center' },
@@ -92,16 +68,60 @@ export class PlacePageComponent {
 
   onEventClick(event: Event) {
     console.log('Event clicked:', event);
+    if (this.place && event.place_id) {
+      this.router.navigate(['/event', event.place_id, event.id]);
+    }
   }
 
   onGetTickets() {
-    if (this.place.contact.website.url) {
-      window.open(this.place.contact.website.url, '_blank');
+    if (this.place && this.place.website) {
+      window.open(this.place.website, '_blank');
     }
   }
 
   onWebsiteClick() {
-    window.open(this.place.contact.website.url, '_blank');
+    if (this.place && this.place.website) {
+      window.open(this.place.website, '_blank');
+    }
+  }
+
+  // Helper method to get full image URL
+  getPlaceImage(): string {
+    if (this.place && this.place.image_path) {
+      if (this.place.image_path.startsWith('http')) {
+        return this.place.image_path;
+      }
+      return `http://localhost:8000${this.place.image_path}`;
+    }
+    return 'https://api.builder.io/api/v1/image/assets/TEMP/7c4a4693085ea05fe2f0c81de0b2b4f284588fea?width=762';
+  }
+
+  // Helper method to get event image
+  getEventImage(event: Event): string {
+    if (event.images_paths && Array.isArray(event.images_paths) && event.images_paths.length > 0) {
+      const imagePath = event.images_paths[0];
+      if (imagePath.startsWith('http')) {
+        return imagePath;
+      }
+      return `http://localhost:8000${imagePath}`;
+    }
+    return 'https://api.builder.io/api/v1/image/assets/TEMP/2de7dbcbd7e38716604a08533dea9b97adb8649c?width=292';
+  }
+
+  // Helper method to format date for display
+  formatEventDate(dateString?: string): { day: string, month: string } {
+    if (!dateString) {
+      return { day: 'TBD', month: '' };
+    }
+    
+    try {
+      const date = new Date(dateString);
+      const day = date.getDate().toString();
+      const month = date.toLocaleDateString('en', { month: 'short' }).toLowerCase();
+      return { day, month };
+    } catch {
+      return { day: 'TBD', month: '' };
+    }
   }
 
   getOccupancyLevel(section: FloorSection): 'low' | 'medium' | 'high' {

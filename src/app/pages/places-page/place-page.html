@@ -1,50 +1,68 @@
 <div class="place-page">
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <img 
-      [src]="place.image" 
-      [alt]="place.name" 
-      class="hero-image"
-    />
-    <h1 class="place-title">{{ place.name }}</h1>
-  </section>
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p>Loading place...</p>
+  </div>
 
-  <!-- Description -->
-  <section class="description-section">
-    <p class="place-description">{{ place.description }}</p>
-  </section>
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-container">
+    <p class="error-message">{{ error }}</p>
+    <button (click)="loadPlaceData(place?.id || 0)" class="retry-button">Try Again</button>
+  </div>
 
-  <!-- Local Events -->
-  <section class="local-events-section">
-    <h2 class="section-title">local events</h2>
-    <div class="events-scroll">
-      <div 
-        class="event-card" 
-        *ngFor="let event of events" 
-        (click)="onEventClick(event)"
-      >
-        <div class="event-card-wrapper">
-          <img [src]="event.image" [alt]="event.title" class="event-image" />
-          <div class="event-date">
-            <span class="event-day">{{ event.date.day }}</span>
-            <span class="event-month">{{ event.date.month }}</span>
-          </div>
-          <div class="event-info">
-            <h3 class="event-title">{{ event.title }}</h3>
-            <div class="event-location">
-              <svg class="location-icon" width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3.5 10C3.5 10.2761 3.27614 10.5 3 10.5C2.72386 10.5 2.5 10.2761 2.5 10L3 10L3.5 10ZM3 5.66667C1.52724 5.66667 0.333333 4.47276 0.333333 3C0.333333 1.52724 1.52724 0.333333 3 0.333333C4.47276 0.333333 5.66667 1.52724 5.66667 3C5.66667 4.47276 4.47276 5.66667 3 5.66667ZM3 10L2.5 10L2.5 3L3 3L3.5 3L3.5 10L3 10Z" fill="#FEF5E6"/>
-              </svg>
-              <span>{{ event.location }}</span>
+  <!-- Place Content -->
+  <div *ngIf="place && !loading && !error">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <img 
+        [src]="getPlaceImage()" 
+        [alt]="place.name" 
+        class="hero-image"
+      />
+      <h1 class="place-title">{{ place.name }}</h1>
+    </section>
+
+    <!-- Description -->
+    <section class="description-section">
+      <p class="place-description">{{ place.bio }}</p>
+    </section>
+
+    <!-- Local Events -->
+    <section class="local-events-section">
+      <h2 class="section-title">local events</h2>
+      <div class="events-scroll">
+        <div *ngIf="events.length === 0" class="no-events">
+          <p>No events available at this place.</p>
+        </div>
+        
+        <div 
+          class="event-card" 
+          *ngFor="let event of events" 
+          (click)="onEventClick(event)"
+        >
+          <div class="event-card-wrapper">
+            <img [src]="getEventImage(event)" [alt]="event.name" class="event-image" />
+            <div class="event-date">
+              <span class="event-day">{{ formatEventDate(event.date).day }}</span>
+              <span class="event-month">{{ formatEventDate(event.date).month }}</span>
             </div>
+            <div class="event-info">
+              <h3 class="event-title">{{ event.name }}</h3>
+              <div class="event-location">
+                <svg class="location-icon" width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.5 10C3.5 10.2761 3.27614 10.5 3 10.5C2.72386 10.5 2.5 10.2761 2.5 10L3 10L3.5 10ZM3 5.66667C1.52724 5.66667 0.333333 4.47276 0.333333 3C0.333333 1.52724 1.52724 0.333333 3 0.333333C4.47276 0.333333 5.66667 1.52724 5.66667 3C5.66667 4.47276 4.47276 5.66667 3 5.66667ZM3 10L2.5 10L2.5 3L3 3L3.5 3L3.5 10L3 10Z" fill="#FEF5E6"/>
+                </svg>
+                <span>{{ event.address }}</span>
+              </div>
+            </div>
+            <svg class="favorite-icon" width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.25 2.83999C5.08333 0.101573 1 0.393239 1 3.89326C1 7.39327 6.25 10.31 6.25 10.31C6.25 10.31 11.5 7.39327 11.5 3.89326C11.5 0.393239 7.41667 0.101573 6.25 2.83999Z" stroke="#FEF5E6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </div>
-          <svg class="favorite-icon" width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6.25 2.83999C5.08333 0.101573 1 0.393239 1 3.89326C1 7.39327 6.25 10.31 6.25 10.31C6.25 10.31 11.5 7.39327 11.5 3.89326C11.5 0.393239 7.41667 0.101573 6.25 2.83999Z" stroke="#FEF5E6" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
   <!-- Live Crowd -->
   <section class="live-crowd-section">
@@ -112,70 +130,62 @@
     </div>
   </section>
 
-  <!-- Schedule -->
-  <section class="schedule-section">
-    <h2 class="section-title">Schedule</h2>
-    <div class="schedule-details">
-      <p>{{ place.schedule.weekdays }}</p>
-      <p>{{ place.schedule.saturday }}</p>
-      <p>{{ place.schedule.sunday }}</p>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section class="contact-section">
-    <h2 class="section-title">CONTACT</h2>
-    <div class="contact-info">
-      <!-- Website -->
-      <div class="contact-item">
-        <svg class="contact-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2 12H7M2 12C2 16.9706 6.02944 21 11 21M2 12C2 7.02944 6.02944 3 11 3M7 12H15M7 12C7 16.9706 8.79086 21 11 21M7 12C7 7.02944 8.79086 3 11 3M15 12H20M15 12C15 7.02944 13.2091 3 11 3M15 12C15 16.9706 13.2091 21 11 21M20 12C20 7.02944 15.9706 3 11 3M20 12C20 16.9706 15.9706 21 11 21" stroke="#3A4F4C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <a 
-          [href]="place.contact.website.url" 
-          target="_blank" 
-          class="contact-link underline"
-          (click)="onWebsiteClick()"
-        >
-          {{ place.contact.website.label }}
-        </a>
+    <!-- Schedule -->
+    <section class="schedule-section">
+      <h2 class="section-title">Schedule</h2>
+      <div class="schedule-details">
+        <p>Monday - Friday: {{ place.monday_friday }}</p>
+        <p>Saturday: {{ place.saturday }}</p>
+        <p>Sunday: {{ place.sunday }}</p>
       </div>
+    </section>
 
-      <!-- Email -->
-      <div class="contact-item">
-        <svg class="contact-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3 29L9.10764 33.6123L9.10967 33.614C9.78785 34.1113 10.1271 34.3601 10.4988 34.4562C10.8272 34.5412 11.1725 34.5412 11.501 34.4562C11.8729 34.36 12.2132 34.1105 12.8926 33.6123C12.8926 33.6123 16.8101 30.6059 19 29M2 38.8002V31.2002C2 30.0801 2 29.5196 2.21799 29.0918C2.40973 28.7155 2.71547 28.4097 3.0918 28.218C3.51962 28 4.08009 28 5.2002 28H16.8002C17.9203 28 18.4796 28 18.9074 28.218C19.2837 28.4097 19.5905 28.7155 19.7822 29.0918C20 29.5192 20 30.079 20 31.1969V38.8036C20 39.9215 20 40.4805 19.7822 40.9079C19.5905 41.2842 19.2837 41.5905 18.9074 41.7822C18.48 42 17.921 42 16.8031 42H5.19691C4.07899 42 3.5192 42 3.0918 41.7822C2.71547 41.5905 2.40973 41.2842 2.21799 40.9079C2 40.4801 2 39.9203 2 38.8002Z" stroke="#3A4F4C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span class="contact-text">{{ place.contact.email }}</span>
-      </div>
+    <!-- Contact -->
+    <section class="contact-section">
+      <h2 class="section-heading">CONTACT</h2>
+      <div class="contact-info">
+        <!-- Website -->
+        <div class="contact-item" *ngIf="place.website">
+          <img src="/Vector.png" alt="Vector" class="contact-vector">
+          <a 
+            [href]="place.website" 
+            target="_blank" 
+            class="contact-link underline"
+            (click)="onWebsiteClick()"
+          >
+            website
+          </a>
+        </div>
 
-      <!-- Phone -->
-      <div class="contact-item">
-        <svg class="contact-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M7.50246 65.2572C7.19873 64.4979 6.46332 64 5.64551 64H2.89474C1.8483 64 1 64.8481 1 65.8945C1 74.7892 8.21078 82 17.1055 82C18.1519 82 19 81.1516 19 80.1052L19.0005 77.354C19.0005 76.5361 18.5027 75.8009 17.7434 75.4971L15.1069 74.4429C14.4249 74.1701 13.6483 74.2929 13.0839 74.7632L12.4035 75.3307C11.6089 75.9929 10.4396 75.9402 9.7082 75.2088L7.79222 73.2911C7.06079 72.5596 7.00673 71.3913 7.66895 70.5967L8.23633 69.9163C8.70661 69.352 8.83049 68.5752 8.55766 67.8931L7.50246 65.2572Z" stroke="#354B48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span class="contact-text">{{ place.contact.phone }}</span>
-      </div>
+        <!-- Email -->
+        <div class="contact-item" *ngIf="place.email">
+          <img src="/Vector-1.png" alt="Vector 1" class="contact-vector">
+          <span class="contact-text">{{ place.email }}</span>
+        </div>
 
-      <!-- Address -->
-      <div class="contact-item">
-        <svg class="contact-icon" width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M14 95V110M14 95L20 92V107L14 110M14 95L8 92M14 110L8 107M8 107L2 110V95L8 92M8 107V92" stroke="#354B48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <div class="contact-text address">
-          <span>{{ place.contact.address.street }}</span>
-          <span>{{ place.contact.address.city }}</span>
+        <!-- Phone -->
+        <div class="contact-item" *ngIf="place.phone_number">
+          <img src="/Vector-2.png" alt="Vector 2" class="contact-vector">
+          <span class="contact-text">{{ place.phone_number }}</span>
+        </div>
+
+        <!-- Address -->
+        <div class="contact-item" *ngIf="place.address">
+          <img src="/Vector-3.png" alt="Vector 3" class="contact-vector">
+          <div class="contact-text address">
+            <span>{{ place.address }}</span>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Get Tickets Button -->
-  <section class="cta-section">
-    <button class="get-tickets-btn" (click)="onGetTickets()">
-      Get tickets
-    </button>
-  </section>
+    <!-- Get Tickets Button -->
+    <section class="cta-section" *ngIf="place.website">
+      <button class="get-tickets-btn" (click)="onGetTickets()">
+        Get tickets
+      </button>
+    </section>
+  </div>
 
   <!-- Navbar -->
   <app-navbar></app-navbar>
