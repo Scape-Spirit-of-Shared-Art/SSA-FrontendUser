@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../components/navbar/navbar';
+import { ApiService, Event } from '../../services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -9,33 +10,59 @@ import { NavbarComponent } from '../../components/navbar/navbar';
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
-export class HomeComponent {
-  events = [
-    {
-      image: 'https://api.builder.io/api/v1/image/assets/TEMP/2de7dbcbd7e38716604a08533dea9b97adb8649c?width=292',
-      title: 'nume eveniment',
-      location: 'locatie',
-      date: { day: '18', month: 'oct' }
-    },
-    {
-      image: 'https://api.builder.io/api/v1/image/assets/TEMP/2de7dbcbd7e38716604a08533dea9b97adb8649c?width=292',
-      title: 'nume eveniment',
-      location: 'locatie',
-      date: { day: '18', month: 'oct' }
-    },
-    {
-      image: 'https://api.builder.io/api/v1/image/assets/TEMP/569dbac6e9593bc7b669160f4237d2fa8cc487b4?width=292',
-      title: 'nume eveniment',
-      location: 'locatie',
-      date: { day: '18', month: 'oct' }
-    },
-    {
-      image: 'https://api.builder.io/api/v1/image/assets/TEMP/ad33659c33381eac40061641b81f19d65a13ad9f?width=292',
-      title: 'nume eveniment',
-      location: 'locatie',
-      date: { day: '18', month: 'oct' }
+export class HomeComponent implements OnInit {
+  events: Event[] = [];
+  loading = true;
+  error: string | null = null;
+
+  constructor(private apiService: ApiService) {}
+
+  ngOnInit() {
+    this.loadEvents();
+  }
+
+  loadEvents() {
+    this.loading = true;
+    this.error = null;
+    
+    this.apiService.getAllEvents().subscribe({
+      next: (events) => {
+        this.events = events;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading events:', error);
+        this.error = 'Failed to load events';
+        this.loading = false;
+      }
+    });
+  }
+
+  // Helper method to format date for display
+  formatEventDate(dateString?: string): { day: string, month: string } {
+    if (!dateString) {
+      return { day: 'TBD', month: '' };
     }
-  ];
+    
+    try {
+      const date = new Date(dateString);
+      const day = date.getDate().toString();
+      const month = date.toLocaleDateString('en', { month: 'short' }).toLowerCase();
+      return { day, month };
+    } catch {
+      return { day: 'TBD', month: '' };
+    }
+  }
+
+  // Helper method to get event image
+  getEventImage(event: Event): string {
+    if (event.images_paths && Array.isArray(event.images_paths) && event.images_paths.length > 0) {
+      const imagePath = event.images_paths[0];
+      return `http://localhost:8000${imagePath}`;
+    }
+    // Use the same fallback image that's currently showing
+    return 'https://api.builder.io/api/v1/image/assets/TEMP/2de7dbcbd7e38716604a08533dea9b97adb8649c?width=292';
+  }
 
   cityLayers = [
     {
@@ -71,13 +98,15 @@ export class HomeComponent {
     }
   ];
 
-  onSearch(event: Event) {
+  onSearch(event: any) {
     const input = event.target as HTMLInputElement;
     console.log('Search:', input.value);
   }
 
-  onEventClick(event: any) {
+  onEventClick(event: Event) {
     console.log('Event clicked:', event);
+    // You can add navigation to event details here
+    // For example: this.router.navigate(['/event', event.id]);
   }
 
   onCategoryClick(category: any) {

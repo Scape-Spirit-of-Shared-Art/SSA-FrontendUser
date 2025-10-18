@@ -30,21 +30,38 @@
     <!-- Moments That Move the City -->
     <section class="section">
       <h2 class="section-title">Moments That Move the City</h2>
-      <div class="events-scroll">
+      
+      <!-- Loading State -->
+      <div *ngIf="loading" class="loading-container">
+        <p>Loading events...</p>
+      </div>
+      
+      <!-- Error State -->
+      <div *ngIf="error && !loading" class="error-container">
+        <p>{{ error }}</p>
+        <button (click)="loadEvents()" class="retry-button">Retry</button>
+      </div>
+      
+      <!-- Events List -->
+      <div *ngIf="!loading && !error" class="events-scroll">
+        <div *ngIf="events.length === 0" class="no-events">
+          <p>No events available at the moment.</p>
+        </div>
+        
         <div class="event-card" *ngFor="let event of events" (click)="onEventClick(event)">
           <div class="event-card-wrapper">
-            <img [src]="event.image" [alt]="event.title" class="event-image" />
+            <img [src]="getEventImage(event)" [alt]="event.name" class="event-image" />
             <div class="event-date">
-              <span class="event-day">{{ event.date.day }}</span>
-              <span class="event-month">{{ event.date.month }}</span>
+              <span class="event-day">{{ formatEventDate(event.date).day }}</span>
+              <span class="event-month">{{ formatEventDate(event.date).month }}</span>
             </div>
             <div class="event-info">
-              <h3 class="event-title">{{ event.title }}</h3>
+              <h3 class="event-title">{{ event.name }}</h3>
               <div class="event-location">
                 <svg class="location-icon" width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3.5 10C3.5 10.2761 3.27614 10.5 3 10.5C2.72386 10.5 2.5 10.2761 2.5 10L3 10L3.5 10ZM3 5.66667C1.52724 5.66667 0.333333 4.47276 0.333333 3C0.333333 1.52724 1.52724 0.333333 3 0.333333C4.47276 0.333333 5.66667 1.52724 5.66667 3C5.66667 4.47276 4.47276 5.66667 3 5.66667ZM3 10L2.5 10L2.5 3L3 3L3.5 3L3.5 10L3 10Z" fill="#FEF5E6"/>
                 </svg>
-                <span>{{ event.location }}</span>
+                <span>{{ event.address }}</span>
               </div>
             </div>
             <svg class="favorite-icon" width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -95,11 +112,15 @@
     <section class="section">
       <h2 class="section-title">Own the City</h2>
       <div class="map-container">
-        <img 
-          src="https://api.builder.io/api/v1/image/assets/TEMP/50c800033314162b70f7908ca959f7d6665441cb?width=710" 
-          alt="Craiova Map" 
+        <iframe 
+          src="https://www.google.com/maps/d/u/0/embed?mid=1nQS1onVysUrPx_pwAZrTzpCY714x_H4&ehbc=2E312F&noprof=1"
           class="map-image"
-        />
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Craiova Map with Points">
+        </iframe>
       </div>
     </section>
   
