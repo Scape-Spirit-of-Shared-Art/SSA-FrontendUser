@@ -149,9 +149,22 @@ export class ChatbotPage implements OnInit, OnDestroy {
         });
         break;
       case 'completed':
+        let message = 'Reservation completed successfully!';
+        if (session.result) {
+          try {
+            // Try to parse the result and extract the message
+            const result = typeof session.result === 'string' ? JSON.parse(session.result) : session.result;
+            if (result && result.message) {
+              message = result.message;
+            }
+          } catch (error) {
+            console.error('Error parsing result:', error);
+            // Fall back to default message if parsing fails
+          }
+        }
         this.messages.push({
           role: 'assistant',
-          content: session.result ? JSON.stringify(session.result) : 'Reservation completed successfully!',
+          content: message,
           timestamp: new Date()
         });
         break;
