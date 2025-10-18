@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavbarComponent } from '../../components/navbar/navbar';
+import { InputEventsComponent } from '../../components/input-events/input-events';
 import { ApiService, Event } from '../../services/api.service';
 
 @Component({
   selector: 'app-event',
   standalone: true,
-  imports: [CommonModule, NavbarComponent],
+  imports: [CommonModule, NavbarComponent, InputEventsComponent],
   templateUrl: './event.html',
   styleUrl: './event.css'
 })
@@ -15,6 +16,7 @@ export class EventComponent implements OnInit {
   event: Event | null = null;
   loading = true;
   error: string | null = null;
+  showTicketInput = false;
 
   constructor(
     private apiService: ApiService, 
@@ -55,9 +57,7 @@ export class EventComponent implements OnInit {
   }
 
   onGetTickets() {
-    if (this.event && this.event.website) {
-      window.open(this.event.website, '_blank');
-    }
+    this.showTicketInput = true;
   }
 
   onWebsiteClick() {

@@ -37,52 +37,60 @@
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact-section">
-      <h2 class="section-heading">CONTACT</h2>
-      
-      <div class="contact-info">
-        <!-- Website -->
-        <div class="contact-item" *ngIf="event.website">
-          <img src="/Vector.png" alt="Vector" class="contact-vector">
-          <a 
-            [href]="event.website" 
-            target="_blank" 
-            class="contact-link underline"
-            (click)="onWebsiteClick()"
-          >
-            website
-          </a>
-        </div>
+    <!-- Contact Section and Get Tickets Button -->
+    <div *ngIf="!showTicketInput">
+      <!-- Contact Section -->
+      <section class="contact-section">
+        <h2 class="section-heading">CONTACT</h2>
+        
+        <div class="contact-info">
+          <!-- Website -->
+          <div class="contact-item" *ngIf="event.website">
+            <img src="/Vector.png" alt="Vector" class="contact-vector">
+            <a 
+              [href]="event.website" 
+              target="_blank" 
+              class="contact-link underline"
+              (click)="onWebsiteClick()"
+            >
+              website
+            </a>
+          </div>
 
-        <!-- Email -->
-        <div class="contact-item" *ngIf="event.email">
-          <img src="/Vector-1.png" alt="Vector 1" class="contact-vector">
-          <span class="contact-text">{{ event.email }}</span>
-        </div>
+          <!-- Email -->
+          <div class="contact-item" *ngIf="event.email">
+            <img src="/Vector-1.png" alt="Vector 1" class="contact-vector">
+            <span class="contact-text">{{ event.email }}</span>
+          </div>
 
-        <!-- Phone -->
-        <div class="contact-item" *ngIf="event.phone_number">
-          <img src="/Vector-2.png" alt="Vector 2" class="contact-vector">
-          <span class="contact-text">{{ event.phone_number }}</span>
-        </div>
+          <!-- Phone -->
+          <div class="contact-item" *ngIf="event.phone_number">
+            <img src="/Vector-2.png" alt="Vector 2" class="contact-vector">
+            <span class="contact-text">{{ event.phone_number }}</span>
+          </div>
 
-        <!-- Address -->
-        <div class="contact-item" *ngIf="event.address">
-          <img src="/Vector-3.png" alt="Vector 3" class="contact-vector">
-          <div class="contact-text address">
-            <span>{{ event.address }}</span>
+          <!-- Address -->
+          <div class="contact-item" *ngIf="event.address">
+            <img src="/Vector-3.png" alt="Vector 3" class="contact-vector">
+            <div class="contact-text address">
+              <span>{{ event.address }}</span>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Get Tickets Button -->
-    <section class="cta-section" *ngIf="event.website">
-      <button class="get-tickets-btn" (click)="onGetTickets()">
-        Get tickets
-      </button>
-    </section>
+      <!-- Get Tickets Button -->
+      <section class="cta-section" *ngIf="event.website">
+        <button class="get-tickets-btn" (click)="onGetTickets()">
+          Get tickets
+        </button>
+      </section>
+    </div>
+
+    <!-- Ticket Input Component -->
+    <div *ngIf="showTicketInput" class="ticket-input-section">
+      <app-input-events></app-input-events>
+    </div>
   </div>
 
   <!-- Navbar -->

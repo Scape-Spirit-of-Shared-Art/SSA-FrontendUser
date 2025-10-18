@@ -151,6 +151,13 @@
   justify-content: center;
 }
 
+/* Ticket Input Section */
+.ticket-input-section {
+  padding: 146px 16px 0;
+  display: flex;
+  justify-content: center;
+}
+
 .get-tickets-btn {
   width: 247px;
   height: 50px;
