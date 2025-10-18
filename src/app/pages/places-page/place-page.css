@@ -251,11 +251,52 @@
   padding: 93px 0 0;
 }
 
+.no-floor-plan {
+  text-align: center;
+  padding: 40px 20px;
+  color: #354B48;
+  font-size: 16px;
+}
+
+.floor-selector {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.floor-button {
+  padding: 8px 16px;
+  border: 2px solid #354B48;
+  background: transparent;
+  color: #354B48;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.floor-button:hover {
+  background: #354B48;
+  color: #FEF5E6;
+}
+
+.floor-button.active {
+  background: #354B48;
+  color: #FEF5E6;
+}
+
 .floor-plan {
   position: relative;
-  width: 290px;
-  height: 77px;
+  width: 100%;
+  max-width: 1000px;
+  height: 300px;
   margin: 31px auto 0;
+  overflow: visible;
+  background: rgba(254, 245, 230, 0.3);
+  border: 1px dashed #354B48;
+  border-radius: 10px;
 }
 
 .floor-section {
@@ -488,6 +529,37 @@
     width: 18px;
     height: 18px;
   }
+
+  .floor-plan {
+    width: 100%;
+    max-width: 400px;
+    height: 150px;
+    margin: 20px auto 0;
+  }
+
+  .floor-section {
+    border-width: 2px;
+    border-radius: 6px;
+  }
+
+  .section-number {
+    font-size: 10px;
+  }
+
+  .occupancy-icon {
+    width: 8px;
+    height: 7px;
+  }
+
+  .floor-selector {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .floor-button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 380px) {
@@ -506,6 +578,27 @@
   .contact-link,
   .contact-text {
     font-size: 18px;
+  }
+
+  .floor-plan {
+    width: 100%;
+    max-width: 380px;
+    height: 130px;
+    margin: 15px auto 0;
+  }
+
+  .floor-section {
+    border-width: 1px;
+    border-radius: 4px;
+  }
+
+  .section-number {
+    font-size: 8px;
+  }
+
+  .occupancy-icon {
+    width: 6px;
+    height: 5px;
   }
 
   .event-card-wrapper {
@@ -552,6 +645,36 @@
   .contact-vector {
     width: 16px;
     height: 16px;
+  }
+
+  .floor-plan {
+    width: 100%;
+    max-width: 360px;
+    height: 110px;
+    margin: 10px auto 0;
+  }
+
+  .floor-section {
+    border-width: 1px;
+    border-radius: 3px;
+  }
+
+  .section-number {
+    font-size: 7px;
+  }
+
+  .occupancy-icon {
+    width: 5px;
+    height: 4px;
+  }
+
+  .floor-selector {
+    gap: 6px;
+  }
+
+  .floor-button {
+    padding: 4px 8px;
+    font-size: 10px;
   }
 
   .event-card-wrapper {

@@ -5,6 +5,7 @@ import { HomeComponent } from './pages/home/home';
 import { EventComponent } from './pages/events/event';
 import { PlacesListComponent } from './pages/places-list/places-list';
 import { PlacePageComponent } from './pages/places-page/place-page';
+import { SavedPageComponent } from './pages/saved-page/saved-page';
 
 export const routes: Routes = [
   { path: 'loading', component: LoadingComponent },
@@ -14,4 +15,5 @@ export const routes: Routes = [
   { path: 'event/:placeId/:eventId', component: EventComponent },
   { path: 'places-list/:category', component: PlacesListComponent },
   { path: 'places-page/:id', component: PlacePageComponent },
+  { path: 'saved-page', component: SavedPageComponent },
 ];
