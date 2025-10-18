@@ -1,0 +1,84 @@
+<div class="places-list-page">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-background"></div>
+    <img 
+      [src]="category.heroImage" 
+      [alt]="category.title" 
+      class="hero-image"
+    />
+    <h1 class="hero-title">{{ category.title }}</h1>
+  </section>
+
+  <!-- Category Description -->
+  <section class="description-section">
+    <p class="category-description">{{ category.description }}</p>
+  </section>
+
+  <!-- Places List -->
+  <section class="places-section">
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading-container">
+      <div class="loading-spinner"></div>
+      <p>Loading places...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error && !loading" class="error-container">
+      <p class="error-message">{{ error }}</p>
+      <button (click)="loadPlaces()" class="retry-button">Try Again</button>
+    </div>
+
+    <!-- Places List -->
+    <div 
+      class="place-card" 
+      *ngFor="let place of places" 
+      (click)="onPlaceClick(place)"
+    >
+      <div class="place-card-background"></div>
+      <div class="place-card-content">
+        <img 
+          [src]="getPlaceImage(place)" 
+          [alt]="place.name" 
+          class="place-image"
+        />
+        <div class="place-info">
+          <h3 class="place-name">{{ place.name }}</h3>
+          <p class="place-bio">{{ place.bio }}</p>
+          <div class="place-status">
+            <div class="busy-indicator">
+              <svg 
+                *ngFor="let icon of getBusyIcons(getBusyLevel(place))" 
+                class="user-icon" 
+                width="13" 
+                height="12" 
+                viewBox="0 0 13 12" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.20689 1.97931C5.06424 1.97931 4.13793 2.8655 4.13793 3.95868C4.13793 5.05185 5.06424 5.93805 6.20689 5.93805C7.34955 5.93805 8.27586 5.05185 8.27586 3.95868C8.27586 2.8655 7.34955 1.97931 6.20689 1.97931ZM8.09016 6.31877C8.83189 5.77622 9.31034 4.92091 9.31034 3.95868C9.31034 2.31891 7.92088 0.989624 6.20689 0.989624C4.49291 0.989624 3.10345 2.31891 3.10345 3.95868C3.10345 4.92091 3.5819 5.77622 4.32363 6.31877C3.80355 6.53886 3.32509 6.85032 2.91519 7.24247C2.59868 7.54528 2.33242 7.88724 2.12161 8.25644C1.73258 8.93774 1.89123 9.6324 2.32934 10.1236C2.7511 10.5965 3.42674 10.8865 4.13793 10.8865H8.27586C8.98705 10.8865 9.66269 10.5965 10.0844 10.1236C10.5226 9.6324 10.6812 8.93774 10.2922 8.25644C10.0814 7.88724 9.81511 7.54528 9.4986 7.24247C9.0887 6.85032 8.61024 6.53886 8.09016 6.31877ZM6.20689 6.92773C5.24663 6.92773 4.32569 7.29267 3.64668 7.94228C3.40047 8.17783 3.19341 8.44377 3.02946 8.7309C2.87069 9.00896 2.9219 9.26327 3.11628 9.48121C3.327 9.71747 3.70647 9.89678 4.13793 9.89678H8.27586C8.70732 9.89678 9.08679 9.71747 9.29751 9.48121C9.49189 9.26328 9.5431 9.00896 9.38433 8.7309C9.22038 8.44377 9.01332 8.17783 8.76711 7.94228C8.0881 7.29268 7.16716 6.92773 6.20689 6.92773Z" fill="url(#paint0_linear_157_144)"/>
+                <defs>
+                  <linearGradient id="paint0_linear_157_144" x1="6.20689" y1="0.989624" x2="6.20689" y2="10.8865" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#9A0000"/>
+                    <stop offset="1" stop-color="#C97C00"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <span class="busy-text">{{ getBusyText(getBusyLevel(place)) }}</span>
+          </div>
+          <p class="place-address">{{ place.address }}</p>
+          <p class="tap-more">tap to find more</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Places Found -->
+    <div *ngIf="!loading && !error && places.length === 0" class="no-places-container">
+      <p>No places found for this category.</p>
+    </div>
+  </section>
+
+  <!-- Navbar -->
+  <app-navbar></app-navbar>
+</div>

@@ -68,34 +68,41 @@ export class HomeComponent implements OnInit {
   cityLayers = [
     {
       image: 'https://api.builder.io/api/v1/image/assets/TEMP/85d9efefd748842a32f5c5ebbb323a7a21470f76?width=334',
-      title: 'City Treasures'
+      title: 'City Treasures',
+      route: 'city-treasures'
     },
     {
       image: 'https://api.builder.io/api/v1/image/assets/TEMP/ed77f7494ccff826462966e31decd5e901b98327?width=334',
-      title: 'The Refined Side'
+      title: 'The Refined Side',
+      route: 'refined-side'
     },
     {
       image: 'https://api.builder.io/api/v1/image/assets/TEMP/2974cfacb7173024ab189548b19d8001cf64f14d?width=334',
-      title: 'The Fun Side'
+      title: 'The Fun Side',
+      route: 'fun-side'
     },
     {
       image: 'https://api.builder.io/api/v1/image/assets/TEMP/8971eb81adb72a4c7a75dc57ed94f911265771bf?width=334',
-      title: 'SportSphere'
+      title: 'SportSphere',
+      route: 'sport-sphere'
     }
   ];
 
   otherBeat = [
     {
       image: 'https://api.builder.io/api/v1/image/assets/TEMP/b79347eeb3ec9c730bc7811b4e800a7bd80c2e62?width=104',
-      title: 'City Stays'
+      title: 'City Stays',
+      route: 'city-stays'
     },
     {
       image: 'https://api.builder.io/api/v1/image/assets/TEMP/6860545cc94bfe1e0939088a41ad7b9c3bf99711?width=104',
-      title: 'Taste District'
+      title: 'Taste District',
+      route: 'taste-district'
     },
     {
       image: 'https://api.builder.io/api/v1/image/assets/TEMP/5ab49cf1ccfe030515228cc8bde2e20c4af45baa?width=104',
-      title: 'HEALTH and beauty'
+      title: 'HEALTH and beauty',
+      route: 'health-beauty'
     }
   ];
 
@@ -115,5 +122,8 @@ export class HomeComponent implements OnInit {
 
   onCategoryClick(category: any) {
     console.log('Category clicked:', category);
+    if (category.route) {
+      this.router.navigate(['/places-list', category.route]);
+    }
   }
 }

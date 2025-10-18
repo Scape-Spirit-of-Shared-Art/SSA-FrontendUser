@@ -1,0 +1,182 @@
+<div class="place-page">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <img 
+      [src]="place.image" 
+      [alt]="place.name" 
+      class="hero-image"
+    />
+    <h1 class="place-title">{{ place.name }}</h1>
+  </section>
+
+  <!-- Description -->
+  <section class="description-section">
+    <p class="place-description">{{ place.description }}</p>
+  </section>
+
+  <!-- Local Events -->
+  <section class="local-events-section">
+    <h2 class="section-title">local events</h2>
+    <div class="events-scroll">
+      <div 
+        class="event-card" 
+        *ngFor="let event of events" 
+        (click)="onEventClick(event)"
+      >
+        <div class="event-card-wrapper">
+          <img [src]="event.image" [alt]="event.title" class="event-image" />
+          <div class="event-date">
+            <span class="event-day">{{ event.date.day }}</span>
+            <span class="event-month">{{ event.date.month }}</span>
+          </div>
+          <div class="event-info">
+            <h3 class="event-title">{{ event.title }}</h3>
+            <div class="event-location">
+              <svg class="location-icon" width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.5 10C3.5 10.2761 3.27614 10.5 3 10.5C2.72386 10.5 2.5 10.2761 2.5 10L3 10L3.5 10ZM3 5.66667C1.52724 5.66667 0.333333 4.47276 0.333333 3C0.333333 1.52724 1.52724 0.333333 3 0.333333C4.47276 0.333333 5.66667 1.52724 5.66667 3C5.66667 4.47276 4.47276 5.66667 3 5.66667ZM3 10L2.5 10L2.5 3L3 3L3.5 3L3.5 10L3 10Z" fill="#FEF5E6"/>
+              </svg>
+              <span>{{ event.location }}</span>
+            </div>
+          </div>
+          <svg class="favorite-icon" width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.25 2.83999C5.08333 0.101573 1 0.393239 1 3.89326C1 7.39327 6.25 10.31 6.25 10.31C6.25 10.31 11.5 7.39327 11.5 3.89326C11.5 0.393239 7.41667 0.101573 6.25 2.83999Z" stroke="#FEF5E6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Crowd -->
+  <section class="live-crowd-section">
+    <h2 class="section-title">Live Crowd</h2>
+    <div class="floor-plan">
+      <!-- Left sections -->
+      <div class="floor-section floor-section-left-top">
+        <span class="section-number">7</span>
+        <svg class="occupancy-icon" width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M4.29881 1.7823C3.5718 1.7823 2.98244 2.29993 2.98244 2.93846C2.98244 3.57699 3.5718 4.09461 4.29881 4.09461C5.02583 4.09461 5.61519 3.57699 5.61519 2.93846C5.61519 2.29993 5.02583 1.7823 4.29881 1.7823ZM5.49704 4.31699C5.96896 4.00009 6.27337 3.5005 6.27337 2.93846C6.27337 1.98067 5.38933 1.20422 4.29881 1.20422C3.20829 1.20422 2.32425 1.98067 2.32425 2.93846C2.32425 3.5005 2.62867 4.00009 3.10059 4.31699C2.76969 4.44555 2.46527 4.62748 2.20448 4.85653C2.0031 5.0334 1.83369 5.23314 1.69956 5.44879C1.45204 5.84674 1.55299 6.2525 1.83173 6.53941C2.10008 6.81562 2.52995 6.985 2.98244 6.985H5.61519C6.06768 6.985 6.49755 6.81562 6.76589 6.53942C7.04464 6.2525 7.14558 5.84674 6.89807 5.44879C6.76394 5.23315 6.59453 5.0334 6.39315 4.85653C6.13235 4.62748 5.82793 4.44555 5.49704 4.31699ZM4.29881 4.67269C3.68785 4.67269 3.1019 4.88586 2.66989 5.2653C2.51324 5.40288 2.3815 5.55821 2.27718 5.72593C2.17616 5.88835 2.20875 6.03689 2.33242 6.16419C2.46649 6.30219 2.70792 6.40693 2.98244 6.40693H5.61519C5.8897 6.40693 6.13114 6.30219 6.26521 6.16419C6.38888 6.03689 6.42147 5.88835 6.32045 5.72593C6.21613 5.55821 6.08439 5.40288 5.92774 5.2653C5.49572 4.88586 4.90978 4.67269 4.29881 4.67269Z" fill="#009800"/>
+        </svg>
+      </div>
+      <div class="floor-section floor-section-left-center">
+        <span class="section-number">6</span>
+      </div>
+      <div class="floor-section floor-section-left-bottom">
+        <span class="section-number">8</span>
+      </div>
+
+      <!-- Center section -->
+      <div class="floor-section floor-section-center">
+        <span class="section-number">1</span>
+        <svg class="occupancy-icon occupancy-center" width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_202_243)">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.07401 2.02267C4.19288 2.02267 3.47857 2.64383 3.47857 3.41006C3.47857 4.17629 4.19288 4.79745 5.07401 4.79745C5.95515 4.79745 6.66945 4.17629 6.66945 3.41006C6.66945 2.64383 5.95515 2.02267 5.07401 2.02267ZM6.52625 5.0643C7.09822 4.68402 7.46717 4.08451 7.46717 3.41006C7.46717 2.26071 6.39571 1.32898 5.07401 1.32898C3.75231 1.32898 2.68086 2.26071 2.68086 3.41006C2.68086 4.08451 3.04981 4.68402 3.62177 5.0643C3.22073 5.21857 2.85177 5.43689 2.53569 5.71175C2.29161 5.924 2.08629 6.16368 1.92373 6.42246C1.62374 6.9 1.74608 7.38691 2.08392 7.73121C2.40915 8.06266 2.93015 8.26592 3.47857 8.26592H6.66945C7.21787 8.26592 7.73887 8.06266 8.0641 7.73121C8.40194 7.38691 8.52428 6.9 8.22429 6.42246C8.06173 6.16368 7.85641 5.924 7.61234 5.71175C7.29625 5.43689 6.9273 5.21857 6.52625 5.0643ZM5.07401 5.49114C4.33352 5.49114 3.62336 5.74694 3.09976 6.20226C2.9099 6.36736 2.75023 6.55377 2.6238 6.75503C2.50137 6.94993 2.54086 7.12818 2.69075 7.28093C2.85324 7.44654 3.14586 7.57222 3.47857 7.57222H6.66945C7.00216 7.57222 7.29478 7.44654 7.45727 7.28093C7.60716 7.12818 7.64666 6.94993 7.52422 6.75503C7.39779 6.55377 7.23812 6.36737 7.04826 6.20226C6.52466 5.74694 5.8145 5.49114 5.07401 5.49114Z" fill="url(#paint0_linear_202_243)"/>
+          </g>
+          <defs>
+            <linearGradient id="paint0_linear_202_243" x1="5.07401" y1="1.32898" x2="5.07401" y2="8.26592" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#9A0000"/>
+              <stop offset="1" stop-color="#C97C00"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- Right sections -->
+      <div class="floor-section floor-section-right-top">
+        <span class="section-number">4</span>
+      </div>
+      <div class="floor-section floor-section-right-center">
+        <span class="section-number">3</span>
+      </div>
+      <div class="floor-section floor-section-right-bottom">
+        <span class="section-number">5</span>
+        <svg class="occupancy-icon" width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M4.93241 2.0676C4.05127 2.0676 3.33697 2.68875 3.33697 3.45498C3.33697 4.22122 4.05127 4.84237 4.93241 4.84237C5.81354 4.84237 6.52785 4.22122 6.52785 3.45498C6.52785 2.68875 5.81354 2.0676 4.93241 2.0676ZM6.38465 5.10923C6.95661 4.72895 7.32556 4.12943 7.32556 3.45498C7.32556 2.30563 6.25411 1.3739 4.93241 1.3739C3.61071 1.3739 2.53925 2.30563 2.53925 3.45498C2.53925 4.12943 2.9082 4.72895 3.48017 5.10923C3.07912 5.2635 2.71017 5.48181 2.39408 5.75667C2.15001 5.96892 1.94469 6.20861 1.78213 6.46739C1.48214 6.94493 1.60448 7.43183 1.94232 7.77613C2.26755 8.10758 2.78855 8.31084 3.33697 8.31084H6.52785C7.07627 8.31084 7.59727 8.10758 7.9225 7.77613C8.26034 7.43183 8.38268 6.94493 8.08269 6.46739C7.92013 6.20861 7.71481 5.96892 7.47073 5.75667C7.15465 5.48181 6.78569 5.2635 6.38465 5.10923ZM4.93241 5.53606C4.19192 5.53606 3.48176 5.79186 2.95816 6.24719C2.7683 6.41229 2.60863 6.59869 2.4822 6.79995C2.35976 6.99485 2.39926 7.1731 2.54915 7.32586C2.71164 7.49146 3.00426 7.61714 3.33697 7.61714H6.52785C6.86056 7.61714 7.15318 7.49146 7.31567 7.32586C7.46556 7.1731 7.50505 6.99485 7.38262 6.79995C7.25619 6.59869 7.09652 6.41229 6.90666 6.24719C6.38306 5.79186 5.6729 5.53606 4.93241 5.53606Z" fill="#009800"/>
+        </svg>
+      </div>
+
+      <!-- Connecting lines -->
+      <div class="floor-connector floor-connector-left"></div>
+      <div class="floor-connector floor-connector-right"></div>
+      <div class="floor-connector floor-connector-top"></div>
+      <div class="floor-connector floor-connector-bottom"></div>
+      
+      <!-- Section 9 (separate left) -->
+      <div class="floor-section floor-section-9">
+        <span class="section-number">9</span>
+      </div>
+      
+      <!-- Section 2 (in center, bottom) -->
+      <div class="floor-section floor-section-2">
+        <span class="section-number">2</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schedule -->
+  <section class="schedule-section">
+    <h2 class="section-title">Schedule</h2>
+    <div class="schedule-details">
+      <p>{{ place.schedule.weekdays }}</p>
+      <p>{{ place.schedule.saturday }}</p>
+      <p>{{ place.schedule.sunday }}</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact-section">
+    <h2 class="section-title">CONTACT</h2>
+    <div class="contact-info">
+      <!-- Website -->
+      <div class="contact-item">
+        <svg class="contact-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H7M2 12C2 16.9706 6.02944 21 11 21M2 12C2 7.02944 6.02944 3 11 3M7 12H15M7 12C7 16.9706 8.79086 21 11 21M7 12C7 7.02944 8.79086 3 11 3M15 12H20M15 12C15 7.02944 13.2091 3 11 3M15 12C15 16.9706 13.2091 21 11 21M20 12C20 7.02944 15.9706 3 11 3M20 12C20 16.9706 15.9706 21 11 21" stroke="#3A4F4C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <a 
+          [href]="place.contact.website.url" 
+          target="_blank" 
+          class="contact-link underline"
+          (click)="onWebsiteClick()"
+        >
+          {{ place.contact.website.label }}
+        </a>
+      </div>
+
+      <!-- Email -->
+      <div class="contact-item">
+        <svg class="contact-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 29L9.10764 33.6123L9.10967 33.614C9.78785 34.1113 10.1271 34.3601 10.4988 34.4562C10.8272 34.5412 11.1725 34.5412 11.501 34.4562C11.8729 34.36 12.2132 34.1105 12.8926 33.6123C12.8926 33.6123 16.8101 30.6059 19 29M2 38.8002V31.2002C2 30.0801 2 29.5196 2.21799 29.0918C2.40973 28.7155 2.71547 28.4097 3.0918 28.218C3.51962 28 4.08009 28 5.2002 28H16.8002C17.9203 28 18.4796 28 18.9074 28.218C19.2837 28.4097 19.5905 28.7155 19.7822 29.0918C20 29.5192 20 30.079 20 31.1969V38.8036C20 39.9215 20 40.4805 19.7822 40.9079C19.5905 41.2842 19.2837 41.5905 18.9074 41.7822C18.48 42 17.921 42 16.8031 42H5.19691C4.07899 42 3.5192 42 3.0918 41.7822C2.71547 41.5905 2.40973 41.2842 2.21799 40.9079C2 40.4801 2 39.9203 2 38.8002Z" stroke="#3A4F4C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="contact-text">{{ place.contact.email }}</span>
+      </div>
+
+      <!-- Phone -->
+      <div class="contact-item">
+        <svg class="contact-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.50246 65.2572C7.19873 64.4979 6.46332 64 5.64551 64H2.89474C1.8483 64 1 64.8481 1 65.8945C1 74.7892 8.21078 82 17.1055 82C18.1519 82 19 81.1516 19 80.1052L19.0005 77.354C19.0005 76.5361 18.5027 75.8009 17.7434 75.4971L15.1069 74.4429C14.4249 74.1701 13.6483 74.2929 13.0839 74.7632L12.4035 75.3307C11.6089 75.9929 10.4396 75.9402 9.7082 75.2088L7.79222 73.2911C7.06079 72.5596 7.00673 71.3913 7.66895 70.5967L8.23633 69.9163C8.70661 69.352 8.83049 68.5752 8.55766 67.8931L7.50246 65.2572Z" stroke="#354B48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="contact-text">{{ place.contact.phone }}</span>
+      </div>
+
+      <!-- Address -->
+      <div class="contact-item">
+        <svg class="contact-icon" width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 95V110M14 95L20 92V107L14 110M14 95L8 92M14 110L8 107M8 107L2 110V95L8 92M8 107V92" stroke="#354B48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="contact-text address">
+          <span>{{ place.contact.address.street }}</span>
+          <span>{{ place.contact.address.city }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Get Tickets Button -->
+  <section class="cta-section">
+    <button class="get-tickets-btn" (click)="onGetTickets()">
+      Get tickets
+    </button>
+  </section>
+
+  <!-- Navbar -->
+  <app-navbar></app-navbar>
+</div>

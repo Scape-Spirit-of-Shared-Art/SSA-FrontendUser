@@ -3,6 +3,7 @@ import { LoadingComponent } from './pages/loading/loading.component';
 import { ChatbotPage } from './pages/chatbot-page/chatbot-page';
 import { HomeComponent } from './pages/home/home';
 import { EventComponent } from './pages/events/event';
+import { PlacesListComponent } from './pages/places-list/places-list';
 
 export const routes: Routes = [
   { path: 'loading', component: LoadingComponent },
@@ -10,4 +11,5 @@ export const routes: Routes = [
   { path: 'chatbot', component: ChatbotPage },
   { path: 'home', component: HomeComponent },
   { path: 'event/:placeId/:eventId', component: EventComponent },
+  { path: 'places-list/:category', component: PlacesListComponent },
 ];
