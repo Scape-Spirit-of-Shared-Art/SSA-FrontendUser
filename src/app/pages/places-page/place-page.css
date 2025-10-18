@@ -115,6 +115,27 @@
   margin: 0;
 }
 
+.place-favorite-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.place-favorite-icon:hover {
+  transform: scale(1.1);
+}
+
+.place-favorite-icon.active {
+  fill: #FF6B6B;
+}
+
+.place-favorite-icon.active path {
+  stroke: #FF6B6B !important;
+}
+
 /* Description Section */
 .description-section {
   padding: 9px 16px 0;
@@ -244,6 +265,20 @@
   bottom: 13px;
   right: 10px;
   cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.favorite-icon:hover {
+  transform: scale(1.1);
+}
+
+.favorite-icon.active {
+  fill: #FF6B6B;
+}
+
+.favorite-icon.active path {
+  stroke: #FF6B6B !important;
 }
 
 /* Live Crowd Section */

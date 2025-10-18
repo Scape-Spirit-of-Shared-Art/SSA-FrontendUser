@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavbarComponent } from '../../components/navbar/navbar';
 import { ApiService, Place, Event } from '../../services/api.service';
+import { FavoriteService, FavoriteEvent, FavoritePlace } from '../../services/favorite.service';
 
 interface Room {
   id: number;
@@ -35,6 +36,7 @@ export class PlacePageComponent implements OnInit, OnDestroy {
   events: Event[] = [];
   loading = true;
   error: string | null = null;
+  isPlaceFavorite = false;
   
   floors: Floor[] = [];
   rooms: Room[] = [];
@@ -43,7 +45,8 @@ export class PlacePageComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private favoriteService: FavoriteService
   ) {}
 
   ngOnInit() {
@@ -61,6 +64,7 @@ export class PlacePageComponent implements OnInit, OnDestroy {
       next: (response) => {
         this.place = response.place;
         this.events = response.place.events || [];
+        this.isPlaceFavorite = this.favoriteService.isPlaceFavorite(placeId);
         this.processFloorPlanData();
         this.loading = false;
       },
@@ -307,5 +311,45 @@ export class PlacePageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // Clean up if needed
+  }
+
+  // Favorite methods
+  togglePlaceFavorite() {
+    if (this.place) {
+      const favoritePlace: FavoritePlace = {
+        id: this.place.id,
+        name: this.place.name,
+        bio: this.place.bio,
+        address: this.place.address,
+        image_path: this.place.image_path,
+        categories: this.place.categories,
+        website: this.place.website,
+        email: this.place.email,
+        phone_number: this.place.phone_number
+      };
+      
+      this.isPlaceFavorite = this.favoriteService.togglePlaceFavorite(favoritePlace);
+    }
+  }
+
+  isEventFavorite(event: Event): boolean {
+    return this.favoriteService.isEventFavorite(event.id, event.place_id || 0);
+  }
+
+  toggleEventFavorite(event: Event) {
+    const favoriteEvent: FavoriteEvent = {
+      id: event.id,
+      place_id: event.place_id || 0,
+      name: event.name,
+      bio: event.bio,
+      address: event.address,
+      date: event.date,
+      images_paths: event.images_paths,
+      website: event.website,
+      email: event.email,
+      phone_number: event.phone_number
+    };
+    
+    this.favoriteService.toggleEventFavorite(favoriteEvent);
   }
 }

@@ -21,6 +21,18 @@
         class="hero-image"
       />
       <h1 class="place-title">{{ place.name }}</h1>
+      <svg 
+        class="place-favorite-icon" 
+        [class.active]="isPlaceFavorite"
+        (click)="togglePlaceFavorite()"
+        width="24" 
+        height="22" 
+        viewBox="0 0 24 22" 
+        fill="none" 
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M12.5 5.67998C10.1667 0.203146 2 0.786478 2 7.78652C2 14.7865 12.5 20.62 12.5 20.62C12.5 20.62 23 14.7865 23 7.78652C23 0.786478 14.8333 0.203146 12.5 5.67998Z" stroke="#FEF5E6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </section>
 
     <!-- Description -->
@@ -56,7 +68,16 @@
                 <span>{{ event.address }}</span>
               </div>
             </div>
-            <svg class="favorite-icon" width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg 
+              class="favorite-icon" 
+              [class.active]="isEventFavorite(event)"
+              (click)="toggleEventFavorite(event); $event.stopPropagation()"
+              width="12" 
+              height="11" 
+              viewBox="0 0 12 11" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path d="M6.25 2.83999C5.08333 0.101573 1 0.393239 1 3.89326C1 7.39327 6.25 10.31 6.25 10.31C6.25 10.31 11.5 7.39327 11.5 3.89326C11.5 0.393239 7.41667 0.101573 6.25 2.83999Z" stroke="#FEF5E6" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>

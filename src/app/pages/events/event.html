@@ -20,6 +20,18 @@
         class="hero-image"
       />
       <h1 class="event-title">{{ event.name }}</h1>
+      <svg 
+        class="favorite-icon" 
+        [class.active]="isEventFavorite"
+        (click)="toggleEventFavorite()"
+        width="24" 
+        height="22" 
+        viewBox="0 0 24 22" 
+        fill="none" 
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M12.5 5.67998C10.1667 0.203146 2 0.786478 2 7.78652C2 14.7865 12.5 20.62 12.5 20.62C12.5 20.62 23 14.7865 23 7.78652C23 0.786478 14.8333 0.203146 12.5 5.67998Z" stroke="#FEF5E6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </section>
 
     <!-- Event Description -->

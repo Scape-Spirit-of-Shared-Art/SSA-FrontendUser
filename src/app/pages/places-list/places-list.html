@@ -70,6 +70,18 @@
           <p class="place-address">{{ place.address }}</p>
           <p class="tap-more">tap to find more</p>
         </div>
+        <svg 
+          class="place-favorite-icon" 
+          [class.active]="isPlaceFavorite(place)"
+          (click)="togglePlaceFavorite(place); $event.stopPropagation()"
+          width="23" 
+          height="20" 
+          viewBox="0 0 23 20" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M11.5 4.55744C9.16667 -0.737018 1 -0.17311 1 6.59382C1 13.3607 11.5 19 11.5 19C11.5 19 22 13.3607 22 6.59382C22 -0.17311 13.8333 -0.737018 11.5 4.55744Z" stroke="#3A4F4C" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </div>
     </div>
 

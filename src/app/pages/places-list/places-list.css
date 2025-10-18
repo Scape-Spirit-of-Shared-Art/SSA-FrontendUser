@@ -212,6 +212,27 @@
   padding-bottom: 2px;
 }
 
+.place-favorite-icon {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.place-favorite-icon:hover {
+  transform: scale(1.1);
+}
+
+.place-favorite-icon.active {
+  fill: #FF6B6B;
+}
+
+.place-favorite-icon.active path {
+  stroke: #FF6B6B !important;
+}
+
 /* Responsive */
 @media (max-width: 420px) {
   .hero-section {

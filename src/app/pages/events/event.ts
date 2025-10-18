@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NavbarComponent } from '../../components/navbar/navbar';
 import { InputEventsComponent } from '../../components/input-events/input-events';
 import { ApiService, Event } from '../../services/api.service';
+import { FavoriteService, FavoriteEvent } from '../../services/favorite.service';
 
 @Component({
   selector: 'app-event',
@@ -17,11 +18,13 @@ export class EventComponent implements OnInit {
   loading = true;
   error: string | null = null;
   showTicketInput = false;
+  isEventFavorite = false;
 
   constructor(
     private apiService: ApiService, 
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private favoriteService: FavoriteService
   ) {}
 
   ngOnInit() {
@@ -46,6 +49,7 @@ export class EventComponent implements OnInit {
     this.apiService.getEvent(placeId, eventId).subscribe({
       next: (response) => {
         this.event = response.event;
+        this.isEventFavorite = this.favoriteService.isEventFavorite(eventId, placeId);
         this.loading = false;
       },
       error: (error) => {
@@ -68,6 +72,25 @@ export class EventComponent implements OnInit {
 
   goBack() {
     this.router.navigate(['/home']);
+  }
+
+  toggleEventFavorite() {
+    if (this.event) {
+      const favoriteEvent: FavoriteEvent = {
+        id: this.event.id,
+        place_id: this.event.place_id || 0,
+        name: this.event.name,
+        bio: this.event.bio,
+        address: this.event.address,
+        date: this.event.date,
+        images_paths: this.event.images_paths,
+        website: this.event.website,
+        email: this.event.email,
+        phone_number: this.event.phone_number
+      };
+      
+      this.isEventFavorite = this.favoriteService.toggleEventFavorite(favoriteEvent);
+    }
   }
 
   // Helper method to get event image

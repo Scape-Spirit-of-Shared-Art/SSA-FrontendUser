@@ -44,6 +44,27 @@
   margin: 0;
 }
 
+.favorite-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.favorite-icon:hover {
+  transform: scale(1.1);
+}
+
+.favorite-icon.active {
+  fill: #FF6B6B;
+}
+
+.favorite-icon.active path {
+  stroke: #FF6B6B !important;
+}
+
 /* Description Section */
 .description-section {
   padding: 18px 16px 0;

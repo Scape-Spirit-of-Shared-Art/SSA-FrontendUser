@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavbarComponent } from '../../components/navbar/navbar';
 import { ApiService, Place } from '../../services/api.service';
+import { FavoriteService, FavoritePlace } from '../../services/favorite.service';
 
 interface CategoryConfig {
   title: string;
@@ -79,7 +80,8 @@ export class PlacesListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private favoriteService: FavoriteService
   ) {}
 
   ngOnInit() {
@@ -162,5 +164,26 @@ export class PlacesListComponent implements OnInit {
     }
     // Fallback to default image
     return 'https://api.builder.io/api/v1/image/assets/TEMP/510fd54b2f316f335b4be7647c6fd757c6149416?width=238';
+  }
+
+  // Favorite methods
+  isPlaceFavorite(place: Place): boolean {
+    return this.favoriteService.isPlaceFavorite(place.id);
+  }
+
+  togglePlaceFavorite(place: Place) {
+    const favoritePlace: FavoritePlace = {
+      id: place.id,
+      name: place.name,
+      bio: place.bio,
+      address: place.address,
+      image_path: place.image_path,
+      categories: place.categories,
+      website: place.website,
+      email: place.email,
+      phone_number: place.phone_number
+    };
+    
+    this.favoriteService.togglePlaceFavorite(favoritePlace);
   }
 }
