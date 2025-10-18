@@ -81,6 +81,21 @@
   text-align: center;
 }
 
+.contact-vector {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(25%) sepia(15%) saturate(1000%) hue-rotate(160deg) brightness(95%) contrast(85%);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.contact-vector:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
 .contact-info {
   margin-top: 39px;
   display: flex;
@@ -99,12 +114,6 @@
   gap: 8px;
 }
 
-.contact-icon {
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  margin-top: 1px;
-}
 
 .contact-link,
 .contact-text {
@@ -178,6 +187,11 @@
   .contact-info {
     padding-left: 20px;
   }
+
+  .contact-vector {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 @media (max-width: 380px) {
@@ -232,6 +246,11 @@
     width: 200px;
     font-size: 20px;
     height: 45px;
+  }
+
+  .contact-vector {
+    width: 16px;
+    height: 16px;
   }
 }
 

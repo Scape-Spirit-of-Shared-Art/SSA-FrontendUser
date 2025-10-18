@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavbarComponent } from '../../components/navbar/navbar';
 import { ApiService, Event } from '../../services/api.service';
 
@@ -15,25 +16,34 @@ export class EventComponent implements OnInit {
   loading = true;
   error: string | null = null;
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService, 
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    // For now, we'll load the first available event
-    // In a real app, you'd get the event ID from route parameters
-    this.loadFirstEvent();
+    // Get place ID and event ID from route parameters
+    this.route.params.subscribe(params => {
+      const placeId = +params['placeId'];
+      const eventId = params['eventId'];
+      
+      if (placeId && eventId) {
+        this.loadEvent(placeId, eventId);
+      } else {
+        this.error = 'Invalid event parameters';
+        this.loading = false;
+      }
+    });
   }
 
-  loadFirstEvent() {
+  loadEvent(placeId: number, eventId: string) {
     this.loading = true;
     this.error = null;
     
-    this.apiService.getAllEvents().subscribe({
-      next: (events) => {
-        if (events.length > 0) {
-          this.event = events[0];
-        } else {
-          this.error = 'No events available';
-        }
+    this.apiService.getEvent(placeId, eventId).subscribe({
+      next: (response) => {
+        this.event = response.event;
         this.loading = false;
       },
       error: (error) => {
@@ -54,6 +64,10 @@ export class EventComponent implements OnInit {
     if (this.event && this.event.website) {
       window.open(this.event.website, '_blank');
     }
+  }
+
+  goBack() {
+    this.router.navigate(['/home']);
   }
 
   // Helper method to get event image

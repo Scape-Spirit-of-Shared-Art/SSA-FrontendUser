@@ -9,5 +9,5 @@ export const routes: Routes = [
   { path: '', redirectTo: '/loading', pathMatch: 'full' },
   { path: 'chatbot', component: ChatbotPage },
   { path: 'home', component: HomeComponent },
-  { path: 'event', component: EventComponent },
+  { path: 'event/:placeId/:eventId', component: EventComponent },
 ];

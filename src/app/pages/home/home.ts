@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { NavbarComponent } from '../../components/navbar/navbar';
 import { ApiService, Event } from '../../services/api.service';
 
@@ -15,7 +16,7 @@ export class HomeComponent implements OnInit {
   loading = true;
   error: string | null = null;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit() {
     this.loadEvents();
@@ -105,8 +106,11 @@ export class HomeComponent implements OnInit {
 
   onEventClick(event: Event) {
     console.log('Event clicked:', event);
-    // You can add navigation to event details here
-    // For example: this.router.navigate(['/event', event.id]);
+    if (event.place_id) {
+      this.router.navigate(['/event', event.place_id, event.id]);
+    } else {
+      console.error('Event missing place_id:', event);
+    }
   }
 
   onCategoryClick(category: any) {

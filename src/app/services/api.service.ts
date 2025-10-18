@@ -14,6 +14,7 @@ export interface Event {
   program: string[];
   images_paths: string[];
   date?: string;
+  place_id?: number; // Add place ID to track which place the event belongs to
 }
 
 export interface Place {
@@ -55,7 +56,12 @@ export class ApiService {
           const allEvents: Event[] = [];
           response.places.forEach(place => {
             if (place.events && place.events.length > 0) {
-              allEvents.push(...place.events);
+              // Add place_id to each event
+              const eventsWithPlaceId = place.events.map(event => ({
+                ...event,
+                place_id: place.id
+              }));
+              allEvents.push(...eventsWithPlaceId);
             }
           });
           observer.next(allEvents);
