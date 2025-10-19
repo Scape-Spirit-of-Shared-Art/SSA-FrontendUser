@@ -82,7 +82,7 @@
 
 /* Schedule Section */
 .schedule-section {
-  padding: 102px 16px 0;
+  padding: 30px 16px 0;
   text-align: center;
 }
 
@@ -98,7 +98,7 @@
 
 /* Contact Section */
 .contact-section {
-  padding: 146px 16px 0;
+  padding: 45px 16px 0;
   text-align: center;
 }
 
@@ -118,10 +118,10 @@
 }
 
 .contact-info {
-  margin-top: 39px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 18px;
   align-items: flex-start;
   max-width: 335px;
   margin-left: auto;
@@ -167,14 +167,14 @@
 
 /* CTA Section */
 .cta-section {
-  padding: 50px 16px 0;
+  padding: 40px 16px 0;
   display: flex;
   justify-content: center;
 }
 
 /* Ticket Input Section */
 .ticket-input-section {
-  padding: 146px 16px 0;
+  padding: 40px 16px 0;
   display: flex;
   justify-content: center;
 }

@@ -42,37 +42,37 @@ export class PlacesListComponent implements OnInit {
     'refined-side': {
       title: 'The Refined Side',
       heroImage: 'https://api.builder.io/api/v1/image/assets/TEMP/ed77f7494ccff826462966e31decd5e901b98327?width=748',
-      description: 'Discover Craiova\'s sophisticated side through elegant venues, cultural institutions, and refined experiences. From art galleries to upscale dining, explore the city\'s most polished offerings that showcase its cultural richness and artistic heritage.',
+      description: 'Art, Culture, and Elegance: Craiova invites you to explore its unique blend of refinement and culture. From the grand performances at the Philharmonic to the charming art galleries, the city combines tradition with sophistication. Immerse yourself in artistic performances and moments of inspiration in a city that breathes culture.',
       backendCategory: 'REFINED_SIDE'
     },
     'fun-side': {
       title: 'The Fun Side',
       heroImage: 'https://api.builder.io/api/v1/image/assets/TEMP/2974cfacb7173024ab189548b19d8001cf64f14d?width=748',
-      description: 'Experience Craiova\'s vibrant entertainment scene! From lively bars and clubs to fun activities and social venues, discover where the city comes alive with energy, music, and unforgettable moments of joy and excitement.',
+      description: 'Water Parks, Amusement Parks, and More: Craiova offers an exciting escape into fun and adventure. With thrilling water parks and vibrant amusement centers, it\'s a place where families and adrenaline seekers can enjoy unforgettable moments. Dive into the playful atmosphere and make the most of your leisure time in the heart of the city.',
       backendCategory: 'FUN_SIDE'
     },
     'sport-sphere': {
       title: 'SportSphere',
       heroImage: 'https://api.builder.io/api/v1/image/assets/TEMP/8971eb81adb72a4c7a75dc57ed94f911265771bf?width=748',
-      description: 'Get active in Craiova\'s sports and fitness scene! From modern gyms and sports facilities to outdoor activities and recreational centers, find your perfect way to stay fit and energized in the city.',
+      description: 'Stadiums, Sports Events, and Energetic Activities:Craiova is the perfect destination for sports enthusiasts, featuring modern arenas and top-tier sports facilities. Whether you\'re passionate about football, basketball, or athletics, the city offers an unforgettable atmosphere filled with emotion and adrenaline. Experience the excitement of live competitions and support your favorite teams in a city dedicated to sports.',
       backendCategory: 'SPORT_SPHERE'
     },
     'city-stays': {
       title: 'City Stays',
       heroImage: 'https://api.builder.io/api/v1/image/assets/TEMP/b79347eeb3ec9c730bc7811b4e800a7bd80c2e62?width=748',
-      description: 'Find your perfect accommodation in Craiova! From cozy boutique hotels to modern stays, discover comfortable and welcoming places to rest and recharge while exploring all that the city has to offer.',
+      description: 'Accommodation, Hotels, and Relaxation:Craiova offers a wide range of accommodation options, from elegant hotels to co mfortable guesthouses. Whether you\'re here for business or leisure, the city provides ideal places to relax after a day of exploring. Enjoy a pleasant stay in the heart of a vibrant and welcoming city.',
       backendCategory: 'CITY_STAYS'
     },
     'taste-district': {
       title: 'Taste District',
       heroImage: 'https://api.builder.io/api/v1/image/assets/TEMP/6860545cc94bfe1e0939088a41ad7b9c3bf99711?width=748',
-      description: 'Savor the flavors of Craiova! From traditional Romanian cuisine to international delights, explore the city\'s diverse culinary scene. Discover restaurants, cafes, and local specialties that will delight your taste buds.',
+      description: ' Restaurants, Cafes, and Culinary Delights: Craiova is a place where gastronomy becomes a true experience. From elegant restaurants to cozy cafes, the city offers a wide variety of dishes, blending traditional Romanian cuisine with international flavors. Discover authentic tastes and innovative dishes that reflect the region\'s rich cultural heritage.',
       backendCategory: 'TASTE_DISTRICT'
     },
     'health-beauty': {
       title: 'Health & Beauty',
       heroImage: 'https://api.builder.io/api/v1/image/assets/TEMP/5ab49cf1ccfe030515228cc8bde2e20c4af45baa?width=748',
-      description: 'Pamper yourself in Craiova\'s wellness and beauty scene! From relaxing spas and wellness centers to modern beauty salons, discover places dedicated to your health, relaxation, and personal care.',
+      description: 'Healthcare, Beauty Salons, and Wellness Centers: Craiova places great importance on health and personal care, with modern hospitals, top-notch beauty salons, and wellness centers. Whether you need medical assistance or want to unwind in a beauty spa, the city provides everything you need to feel good and rejuvenated.',
       backendCategory: 'HEALTH_AND_BEAUTY'
     }
   };

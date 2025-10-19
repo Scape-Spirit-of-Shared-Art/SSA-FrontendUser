@@ -129,6 +129,11 @@
   .event-card {
     flex-shrink: 0;
     cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .event-card:hover {
+    transform: translateY(-2px);
   }
   
   .event-card-wrapper {
@@ -138,6 +143,7 @@
     border-radius: 25px;
     position: relative;
     overflow: visible;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   }
   
   .event-image {
@@ -148,31 +154,31 @@
     top: 3px;
     left: 3px;
     object-fit: cover;
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
   }
   
   .event-date {
     position: absolute;
-    top: 9px;
-    right: 9px;
+    top: 8px;
+    right: 8px;
     color: #FEF5E6;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 700;
     text-align: center;
-    letter-spacing: 0.11px;
+    letter-spacing: 0.13px;
     text-transform: lowercase;
-    line-height: 0.73;
+    line-height: 0.85;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    z-index: 2;
   }
   
   .event-day {
     display: block;
-    font-size: 15px;
+    font-size: 18px;
     margin-bottom: 2px;
   }
   
   .event-month {
-    font-size: 11px;
+    font-size: 13px;
   }
   
   .event-info {
@@ -180,7 +186,9 @@
     bottom: 3px;
     left: 3px;
     right: 3px;
-    padding: 0 8px 3px;
+    padding: 6px 8px 4px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%);
+    border-radius: 0 0 22px 22px;
   }
   
   .event-title {
@@ -191,6 +199,7 @@
     letter-spacing: 0.11px;
     text-transform: lowercase;
     margin: 0 0 4px 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
   
   .event-location {
@@ -230,17 +239,22 @@
     overflow: hidden;
     cursor: pointer;
     aspect-ratio: 172 / 104;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease;
+  }
+  
+  .layer-card:hover {
+    transform: translateY(-2px);
   }
   
   .layer-image {
-    width: calc(100% - 10px);
-    height: calc(100% - 24px);
+    width: calc(100% - 6px);
+    height: calc(100% - 28px);
     object-fit: cover;
-    border-radius: 25px;
-    opacity: 0.75;
+    border-radius: 22px;
     position: absolute;
-    top: 2px;
-    left: 2px;
+    top: 3px;
+    left: 3px;
   }
   
   .layer-title {
@@ -273,7 +287,7 @@
   /* The Other Beat */
   .other-beat-scroll {
     display: flex;
-    gap: 8px;
+    gap: 12px;
     overflow-x: auto;
     padding: 3px 0;
     scroll-behavior: smooth;
@@ -288,37 +302,47 @@
   .beat-pill {
     flex-shrink: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
-    height: 36px;
-    padding: 0 20px;
+    justify-content: space-between;
+    width: 110px;
+    height: 95px;
+    padding: 8px;
     background: #3A4F4C;
-    border-radius: 25px;
+    border-radius: 20px;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .beat-pill:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   }
   
   .beat-pill:active {
-    transform: scale(0.95);
+    transform: translateY(-1px);
   }
   
   .beat-image {
-    width: 52px;
-    height: 31px;
-    border-radius: 25px;
+    width: 94px;
+    height: 58px;
+    border-radius: 15px;
     object-fit: cover;
   }
   
   .beat-title {
     color: #FEF5E6;
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 700;
     line-height: 110%;
-    letter-spacing: 0.09px;
+    letter-spacing: 0.1px;
     text-transform: uppercase;
     text-align: center;
-    white-space: pre-line;
+    white-space: normal;
+    word-wrap: break-word;
+    width: 100%;
+    margin-top: 4px;
   }
   
   /* Map Section */
