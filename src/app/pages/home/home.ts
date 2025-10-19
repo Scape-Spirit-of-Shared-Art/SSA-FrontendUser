@@ -67,22 +67,22 @@ export class HomeComponent implements OnInit {
 
   cityLayers = [
     {
-      image: 'https://api.builder.io/api/v1/image/assets/TEMP/85d9efefd748842a32f5c5ebbb323a7a21470f76?width=334',
+      image: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&h=400&fit=crop&q=80',
       title: 'City Treasures',
       route: 'city-treasures'
     },
     {
-      image: 'https://api.builder.io/api/v1/image/assets/TEMP/ed77f7494ccff826462966e31decd5e901b98327?width=334',
+      image: 'https://images.unsplash.com/photo-1580809361436-42a7ec204889?w=600&h=400&fit=crop&q=80',
       title: 'The Refined Side',
       route: 'refined-side'
     },
     {
-      image: 'https://api.builder.io/api/v1/image/assets/TEMP/2974cfacb7173024ab189548b19d8001cf64f14d?width=334',
+      image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&h=400&fit=crop&q=80',
       title: 'The Fun Side',
       route: 'fun-side'
     },
     {
-      image: 'https://api.builder.io/api/v1/image/assets/TEMP/8971eb81adb72a4c7a75dc57ed94f911265771bf?width=334',
+      image: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=600&h=400&fit=crop&q=80',
       title: 'SportSphere',
       route: 'sport-sphere'
     }
@@ -90,17 +90,17 @@ export class HomeComponent implements OnInit {
 
   otherBeat = [
     {
-      image: 'https://api.builder.io/api/v1/image/assets/TEMP/b79347eeb3ec9c730bc7811b4e800a7bd80c2e62?width=104',
+      image: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&h=400&fit=crop&q=80',
       title: 'City Stays',
       route: 'city-stays'
     },
     {
-      image: 'https://api.builder.io/api/v1/image/assets/TEMP/6860545cc94bfe1e0939088a41ad7b9c3bf99711?width=104',
+      image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=400&fit=crop&q=80',
       title: 'Taste District',
       route: 'taste-district'
     },
     {
-      image: 'https://api.builder.io/api/v1/image/assets/TEMP/5ab49cf1ccfe030515228cc8bde2e20c4af45baa?width=104',
+      image: 'https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=600&h=400&fit=crop&q=80',
       title: 'HEALTH and beauty',
       route: 'health-beauty'
     }
