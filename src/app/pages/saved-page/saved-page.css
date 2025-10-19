@@ -263,6 +263,16 @@
   flex-direction: column;
   justify-content: center;
   position: relative;
+  gap: 6px;
+}
+
+.place-name {
+  color: #3A4F4C;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 110%;
+  letter-spacing: 0.14px;
+  margin: 0;
 }
 
 .place-location {

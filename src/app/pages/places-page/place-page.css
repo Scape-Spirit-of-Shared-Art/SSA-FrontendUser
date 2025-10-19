@@ -153,7 +153,7 @@
 
 /* Local Events Section */
 .local-events-section {
-  padding: 103px 0 0;
+  padding: 30px 0 0;
 }
 
 .section-title {
@@ -164,7 +164,7 @@
   letter-spacing: 0.24px;
   text-transform: uppercase;
   text-align: center;
-  margin: 0 0 24px 0;
+  margin: 0 0 20px 0;
 }
 
 .events-scroll {
@@ -283,7 +283,7 @@
 
 /* Live Crowd Section */
 .live-crowd-section {
-  padding: 93px 0 0;
+  padding: 35px 0 0;
 }
 
 .no-floor-plan {
@@ -429,7 +429,7 @@
 
 /* Schedule Section */
 .schedule-section {
-  padding: 114px 0 0;
+  padding: 40px 0 0;
 }
 
 .schedule-details {
@@ -450,7 +450,7 @@
 
 /* Contact Section */
 .contact-section {
-  padding: 146px 16px 0;
+  padding: 45px 16px 0;
   text-align: center;
 }
 
@@ -470,10 +470,10 @@
 }
 
 .contact-info {
-  margin-top: 39px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 18px;
   align-items: flex-start;
   max-width: 335px;
   margin-left: auto;
@@ -518,7 +518,7 @@
 
 /* CTA Section */
 .cta-section {
-  padding: 109px 16px 0;
+  padding: 40px 16px 0;
   display: flex;
   justify-content: center;
 }
