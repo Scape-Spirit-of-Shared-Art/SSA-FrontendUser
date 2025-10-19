@@ -19,7 +19,7 @@ export interface FavoritePlace {
   name: string;
   bio: string;
   address: string;
-  image_path: string;
+  image_path: string; // Keep as image_path for favorite service compatibility
   categories: string[];
   website?: string;
   email?: string;

@@ -62,8 +62,11 @@ export class PlacePageComponent implements OnInit, OnDestroy {
 
     this.apiService.getPlaceById(placeId).subscribe({
       next: (response) => {
+        console.log('Place data loaded:', response.place);
         this.place = response.place;
         this.events = response.place.events || [];
+        console.log('Events loaded:', this.events);
+        console.log('First event details:', this.events[0]);
         this.isPlaceFavorite = this.favoriteService.isPlaceFavorite(placeId);
         this.processFloorPlanData();
         this.loading = false;
@@ -230,8 +233,20 @@ export class PlacePageComponent implements OnInit, OnDestroy {
 
   onEventClick(event: Event) {
     console.log('Event clicked:', event);
-    if (this.place && event.place_id) {
-      this.router.navigate(['/event', event.place_id, event.id]);
+    console.log('Current place:', this.place);
+    console.log('Event ID:', event.id, 'Place ID:', this.place?.id);
+    
+    if (this.place && event.id) {
+      // Use the current place's ID and the event's ID for navigation
+      console.log('Navigating to:', ['/event', this.place.id, event.id]);
+      this.router.navigate(['/event', this.place.id, event.id]);
+    } else {
+      console.error('Cannot navigate: missing place or event ID', {
+        hasPlace: !!this.place,
+        hasEventId: !!event.id,
+        placeId: this.place?.id,
+        eventId: event.id
+      });
     }
   }
 
@@ -249,24 +264,33 @@ export class PlacePageComponent implements OnInit, OnDestroy {
 
   // Helper method to get full image URL
   getPlaceImage(): string {
-    if (this.place && this.place.image_path) {
-      if (this.place.image_path.startsWith('http')) {
-        return this.place.image_path;
+    if (this.place && this.place.imagePath) {
+      if (this.place.imagePath.startsWith('http')) {
+        return this.place.imagePath;
       }
-      return `http://localhost:8000${this.place.image_path}`;
+      return `http://localhost:8000${this.place.imagePath}`;
     }
     return 'https://api.builder.io/api/v1/image/assets/TEMP/7c4a4693085ea05fe2f0c81de0b2b4f284588fea?width=762';
   }
 
   // Helper method to get event image
   getEventImage(event: Event): string {
+    console.log('Getting event image for:', event.name);
+    console.log('Event images_paths:', event.images_paths);
+    
     if (event.images_paths && Array.isArray(event.images_paths) && event.images_paths.length > 0) {
       const imagePath = event.images_paths[0];
+      console.log('First image path:', imagePath);
+      
       if (imagePath.startsWith('http')) {
+        console.log('Using full URL:', imagePath);
         return imagePath;
       }
-      return `http://localhost:8000${imagePath}`;
+      const fullUrl = `http://localhost:8000${imagePath}`;
+      console.log('Constructed URL:', fullUrl);
+      return fullUrl;
     }
+    console.log('No images found, using default');
     return 'https://api.builder.io/api/v1/image/assets/TEMP/2de7dbcbd7e38716604a08533dea9b97adb8649c?width=292';
   }
 
@@ -321,7 +345,7 @@ export class PlacePageComponent implements OnInit, OnDestroy {
         name: this.place.name,
         bio: this.place.bio,
         address: this.place.address,
-        image_path: this.place.image_path,
+        image_path: this.place.imagePath, // Use imagePath (camelCase) from place
         categories: this.place.categories,
         website: this.place.website,
         email: this.place.email,

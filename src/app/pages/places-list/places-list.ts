@@ -154,13 +154,14 @@ export class PlacesListComponent implements OnInit {
 
   // Helper method to get full image URL
   getPlaceImage(place: Place): string {
-    if (place.image_path) {
+    // Use imagePath (camelCase) as returned by the backend
+    if (place.imagePath) {
       // If the image path already includes the full URL, return as is
-      if (place.image_path.startsWith('http')) {
-        return place.image_path;
+      if (place.imagePath.startsWith('http')) {
+        return place.imagePath;
       }
       // Otherwise, construct the full URL with the backend base URL
-      return `http://localhost:8000${place.image_path}`;
+      return `http://localhost:8000${place.imagePath}`;
     }
     // Fallback to default image
     return 'https://api.builder.io/api/v1/image/assets/TEMP/510fd54b2f316f335b4be7647c6fd757c6149416?width=238';
@@ -177,7 +178,7 @@ export class PlacesListComponent implements OnInit {
       name: place.name,
       bio: place.bio,
       address: place.address,
-      image_path: place.image_path,
+      image_path: place.imagePath, // Use imagePath (camelCase) from place
       categories: place.categories,
       website: place.website,
       email: place.email,

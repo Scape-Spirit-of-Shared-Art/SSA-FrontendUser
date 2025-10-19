@@ -32,7 +32,7 @@ export interface Place {
   saturday: string;
   sunday: string;
   events: Event[];
-  image_path: string;
+  imagePath: string; // Changed from image_path to imagePath to match backend response
 }
 
 // Reservation interfaces
