@@ -62,6 +62,35 @@ export interface AllSessionsResponse {
   sessions: { [sessionId: string]: any };
 }
 
+// Event ticket booking interfaces
+export interface StartEventBookingRequest {
+  event_url: string;
+  ticket_count: number;
+}
+
+export interface StartEventBookingResponse {
+  session_id: string;
+  status: string;
+  message: string;
+}
+
+export interface EventBookingSession {
+  session_id: string;
+  status: string;
+  event_url: string;
+  ticket_count: number;
+  waiting_for_input: boolean;
+  created_at: number;
+  updated_at: number;
+  result?: any;
+  error?: string;
+}
+
+export interface AllEventSessionsResponse {
+  total_sessions: number;
+  sessions: { [sessionId: string]: any };
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -131,5 +160,18 @@ export class ApiService {
 
   getAllReservationSessions(): Observable<AllSessionsResponse> {
     return this.http.get<AllSessionsResponse>(`${this.baseUrl}/reservations/`);
+  }
+
+  // Event ticket booking API methods
+  startEventBooking(request: StartEventBookingRequest): Observable<StartEventBookingResponse> {
+    return this.http.post<StartEventBookingResponse>(`${this.baseUrl}/event/start`, request);
+  }
+
+  getEventBookingStatus(sessionId: string): Observable<EventBookingSession> {
+    return this.http.get<EventBookingSession>(`${this.baseUrl}/event/${sessionId}/status`);
+  }
+
+  getAllEventSessions(): Observable<AllEventSessionsResponse> {
+    return this.http.get<AllEventSessionsResponse>(`${this.baseUrl}/event/`);
   }
 }

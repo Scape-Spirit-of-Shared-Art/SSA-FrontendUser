@@ -101,4 +101,18 @@ export class EventComponent implements OnInit {
     }
     return 'https://api.builder.io/api/v1/image/assets/TEMP/f5bbcd2f649e44129dac264705bdc23f1c4503db?width=768';
   }
+
+  // Handle booking completion
+  onBookingComplete(bookingResult: any) {
+    console.log('Booking completed:', bookingResult);
+    // You can add additional logic here, such as showing a success message
+    // or redirecting to a confirmation page
+    alert('Tickets booked successfully!');
+  }
+
+  // Handle booking errors
+  onBookingError(error: string) {
+    console.error('Booking error:', error);
+    alert(`Booking failed: ${error}`);
+  }
 }

@@ -188,7 +188,7 @@
     </section>
 
     <!-- Get Tickets Button -->
-    <section class="cta-section" *ngIf="place.website">
+    <section class="cta-section" *ngIf="place.website && place.categories?.includes('CITY_TREASURES')">
       <button class="get-tickets-btn" (click)="onGetTickets()">
         Get tickets
       </button>

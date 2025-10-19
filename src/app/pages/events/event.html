@@ -101,7 +101,11 @@
 
     <!-- Ticket Input Component -->
     <div *ngIf="showTicketInput" class="ticket-input-section">
-      <app-input-events></app-input-events>
+      <app-input-events 
+        [event]="event"
+        (bookingComplete)="onBookingComplete($event)"
+        (bookingError)="onBookingError($event)">
+      </app-input-events>
     </div>
   </div>
 
